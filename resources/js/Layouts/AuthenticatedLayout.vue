@@ -32,6 +32,9 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </NavLink>
+                                <NavLink :href="route('coil-storage.index')" :active="route().current('coil-storage.index')">
+                                    Coil Storage
+                                </NavLink>
                             </div>
                         </div>
 
