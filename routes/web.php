@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CoilStorageController;
+use App\Http\Controllers\TransactionTypeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,10 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('coil-storage', CoilStorageController::class)
+    ->only(['index', 'store'])
+    ->middleware(['auth', 'verified']);
+
+Route::resource('transaction-types', TransactionTypeController::class)
     ->only(['index', 'store'])
     ->middleware(['auth', 'verified']);
 

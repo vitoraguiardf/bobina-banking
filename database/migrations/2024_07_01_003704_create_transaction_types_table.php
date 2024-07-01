@@ -15,20 +15,22 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
+            $table->unsignedBigInteger("user_id");
+
             $table->string('name', 128);
             $table->text('description');
 
-            $table->boolean('rm_main');
-            $table->boolean('add_main');
+            $table->boolean('rm_main')->default(false);
+            $table->boolean('add_main')->default(false);
 
-            $table->boolean('rm_origin');
-            $table->boolean('add_origin');
+            $table->boolean('rm_origin')->default(false);
+            $table->boolean('add_origin')->default(false);
 
-            $table->boolean('rm_destin');
-            $table->boolean('add_destin');
+            $table->boolean('rm_destin')->default(false);
+            $table->boolean('add_destin')->default(false);
 
-            $table->boolean('rm_void');
-            $table->boolean('add_void');
+            $table->boolean('rm_void')->default(false);
+            $table->boolean('add_void')->default(false);
 
         });
     }

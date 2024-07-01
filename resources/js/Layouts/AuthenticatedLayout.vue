@@ -35,6 +35,9 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('coil-storage.index')" :active="route().current('coil-storage.index')">
                                     Coil Storage
                                 </NavLink>
+                                <NavLink :href="route('transaction-types.index')" :active="route().current('transaction-types.index')">
+                                    Transaction Types
+                                </NavLink>
                             </div>
                         </div>
 

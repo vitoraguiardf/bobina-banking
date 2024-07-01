@@ -3,16 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\TransactionType;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class TransactionTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return Inertia::render('TransactionTypes/Index', [
+            'items' => $request
+                ->user()
+                ->transactionTypes()
+                ->with('user:id,name')
+                ->latest()
+                ->get()
+        ]);
     }
 
     /**
@@ -26,9 +36,14 @@ class TransactionTypeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:128',
+            'description' => 'max:1000',
+        ]);
+        $request->user()->transactionTypes()->create($validated);
+        return redirect(route('transaction-types.index'));
     }
 
     /**

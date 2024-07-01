@@ -49,4 +49,8 @@ class User extends Authenticatable
     function coilStorage(): HasMany {
         return $this->hasMany(CoilStorage::class);
     }
+
+    function transactionTypes(): HasMany {
+        return $this->hasMany(TransactionType::class);
+    }
 }
