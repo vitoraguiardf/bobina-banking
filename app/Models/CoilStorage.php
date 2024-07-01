@@ -2,17 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\traits\WithCreator;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CoilStorage extends Model
 {
-    use HasFactory;
+    use HasFactory, WithCreator;
     protected $fillable = [
         'name'
     ];
-    function user(): BelongsTo {
-        return $this->belongsTo(User::class);
-    }
 }

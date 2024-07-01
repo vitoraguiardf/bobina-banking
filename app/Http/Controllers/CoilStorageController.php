@@ -14,10 +14,14 @@ class CoilStorageController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         return Inertia::render('CoilStorage/Index', [
-            'coilStorages' => CoilStorage::where('user_id', auth()->user()->id)->with('user:id,name')->latest()->get()
+            'coilStorages' => $request->user()
+                                ->coilStorage()
+                                ->with('user:id,name')
+                                ->latest()
+                                ->get()
         ]);
     }
 
