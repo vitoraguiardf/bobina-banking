@@ -4,12 +4,12 @@ import CoilStorage from '@/Components/CoilStorage.vue'
 import InputError from '@/Components/InputError.vue'
 import PrimaryButton from '@/Components/PrimaryButton.vue'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
+defineProps([
+    'items'
+])
 const form = useForm({
     name: '',
 })
-defineProps([
-    'coilStorages'
-])
 </script>
 <template>
     <Head title="Coil Storage" />
@@ -27,11 +27,7 @@ defineProps([
                 <InputError :message="form.errors.name" class="mt-2" />
             </form>
             <div class="mt-6 bg-white shadow-sm rounded-lg divide-y">
-                <CoilStorage
-                    v-for="coilStorage in coilStorages"
-                    :key="CoilStorage.id"
-                    :coil-storage="coilStorage"
-                />
+                <CoilStorage v-for="item in items" :key="item.id" :data="item" />
             </div>
         </div>
     </AuthenticatedLayout>
