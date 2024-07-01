@@ -13,7 +13,7 @@ class TransactionTypeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
         return Inertia::render('TransactionTypes/Index', [
             'items' => TransactionType::with('user:id,name')

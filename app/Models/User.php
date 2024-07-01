@@ -53,4 +53,8 @@ class User extends Authenticatable
     function transactionTypes(): HasMany {
         return $this->hasMany(TransactionType::class);
     }
+
+    function transactions(): HasMany {
+        return $this->hasMany(Transaction::class);
+    }
 }
