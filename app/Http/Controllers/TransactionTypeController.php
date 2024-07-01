@@ -16,10 +16,7 @@ class TransactionTypeController extends Controller
     public function index(Request $request)
     {
         return Inertia::render('TransactionTypes/Index', [
-            'items' => $request
-                ->user()
-                ->transactionTypes()
-                ->with('user:id,name')
+            'items' => TransactionType::with('user:id,name')
                 ->latest()
                 ->get()
         ]);
