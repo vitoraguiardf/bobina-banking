@@ -16,7 +16,7 @@ class TransactionController extends Controller
     public function index(Request $request)
     {
         return Inertia::render('Transaction/Index', [
-            'items' => $request->user()->transactions()->with([
+            'items' => $request->user()->transactionsCreated()->with([
                 'user:id,name',
                 //'fromStorage:id,name',
                 'fromStorage.user:id,name',
@@ -45,7 +45,7 @@ class TransactionController extends Controller
             'to_storage_id' => 'nullable',
             'quantity' => 'required|integer|min:1',
         ]);
-        $request->user()->transactions()->create($validated);
+        $request->user()->transactionsCreated()->create($validated);
         return redirect(route('transaction.index'));
     }
 
