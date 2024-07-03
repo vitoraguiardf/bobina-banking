@@ -17,11 +17,11 @@ class CoilStorageController extends Controller
     public function index(Request $request)
     {
         return Inertia::render('CoilStorage/Index', [
-            'items' => $request->user()
-                ->coilStorage()
-                ->with('user:id,name')
-                ->latest()
-                ->get()
+            'items' => CoilStorage::query()
+            ->with('user:id,name')
+            ->withSum(['fromTransactions', 'toTransactions'], 'quantity')
+            ->latest()
+            ->get()
         ]);
     }
 
