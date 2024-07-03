@@ -1,8 +1,9 @@
 <template>
     <Head title="Transactions" />
     <AuthenticatedLayout>
-        <div class="max-w-2xl mx-auto p4 sm:p-6 lg:p-8">
-            <form @submit.prevent>
+        <div class="max-w-2xl mx-auto p-2 sm:px-6 lg:px-4">
+            <h3>Transferências - Nova</h3>
+            <form @submit.prevent class="mt-2">
 
                 <Select v-model="form.transaction_type_id" :options="transcationTypes" fluid
                     placeholder="Tipo da Transação" option-label="name" option-value="id" input-id="type" />
@@ -16,7 +17,7 @@
                     placeholder="Conta Destino" option-label="name" option-value="id" input-id="to" />
                 <InputFeedBack input-id="to" :errorText="form.errors.to_storage_id"/>
 
-                <InputNumber v-model="form.quantity" :min="0" :max="90" fluid
+                <InputNumber v-model="form.quantity" :min="0" :max="500" fluid
                     placeholder="Quantidade" input-id="quantity" />
                 <InputFeedBack input-id="quantity" :errorText="form.errors.quantity"/>
 
