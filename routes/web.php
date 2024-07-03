@@ -4,6 +4,7 @@ use App\Http\Controllers\CoilStorageController;
 use App\Http\Controllers\TransactionTypeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -26,6 +27,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::resource('users', UserController::class)
+    ->only(['index'])
+    ->middleware(['auth', 'verified']);
 
 Route::resource('coil-storage', CoilStorageController::class)
     ->only(['index', 'store'])
