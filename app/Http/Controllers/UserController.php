@@ -12,7 +12,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return response([
+            'data' => User::query()
+            ->withSum(['fromTransactions', 'toTransactions'], 'quantity')
+            ->get()
+        ], 200);
     }
 
     /**

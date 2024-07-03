@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -56,5 +57,25 @@ class User extends Authenticatable
 
     function transactionsCreated(): HasMany {
         return $this->hasMany(Transaction::class);
+    }
+
+    /**
+     * Transações positivas/cretidatas/entrada/to_this
+     */
+    public function toTransactions(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            Transaction::class,
+            CoilStorage::class, 'user_id', 'to_storage_id', 'id', 'id');
+    }
+    
+    /**
+     * Transações negativas/debitadas/saída/from_this
+     */
+    public function fromTransactions(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            Transaction::class,
+            CoilStorage::class, 'user_id', 'from_storage_id', 'id', 'id');
     }
 }
