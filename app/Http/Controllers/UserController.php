@@ -4,19 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request): Response
     {
-        return response([
-            'data' => User::query()
-            ->withSum(['fromTransactions', 'toTransactions'], 'quantity')
-            ->get()
-        ], 200);
+        return Inertia::render('User/Index', [
+            'items' => User::query()
+                ->withSum(['fromTransactions', 'toTransactions'], 'quantity')
+                ->latest()
+                ->get()
+        ]);
     }
 
     /**
