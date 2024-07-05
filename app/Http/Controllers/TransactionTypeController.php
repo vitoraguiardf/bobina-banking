@@ -16,7 +16,7 @@ class TransactionTypeController extends Controller
     public function index(Request $request): Response
     {
         return Inertia::render('TransactionTypes/Index', [
-            'items' => TransactionType::with('user:id,name')
+            'items' => TransactionType::with('creatorUser:id,name')
                 ->latest()
                 ->get()
         ]);
@@ -35,11 +35,15 @@ class TransactionTypeController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $request->merge([
+            'creator_user_id' => $request->user()->id,
+        ]);
         $validated = $request->validate([
+            'creator_user_id' => 'required|integer|exists:users,id',
             'name' => 'required|string|max:128',
             'description' => 'max:1000',
         ]);
-        $request->user()->transactionTypes()->create($validated);
+        TransactionType::create($validated);
         return redirect(route('transaction-types.index'));
     }
 

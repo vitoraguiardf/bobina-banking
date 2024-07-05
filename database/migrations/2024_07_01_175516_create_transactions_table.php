@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->unsignedBigInteger('creator_user_id');
+            $table->foreign('creator_user_id')->references('id')->on('users');
 
-            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('transaction_type_id');
             $table->unsignedBigInteger('from_storage_id');
             $table->unsignedBigInteger('to_storage_id');

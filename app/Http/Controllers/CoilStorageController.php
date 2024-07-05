@@ -18,7 +18,7 @@ class CoilStorageController extends Controller
     {
         return Inertia::render('CoilStorage/Index', [
             'items' => CoilStorage::query()
-            ->with('user:id,name')
+            ->with('creatorUser:id,name')
             ->withSum(['fromTransactions', 'toTransactions'], 'quantity')
             ->latest()
             ->get()
@@ -38,10 +38,16 @@ class CoilStorageController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $validated= $request->validate([
-            'name' => ['required', 'string', 'max:128']
+        $request->merge([
+            'creator_user_id' => $request->user()->id,
+            'owner_user_id' => $request->user()->id,
         ]);
-        $request->user()->coilStorage()->create($validated);
+        $validated= $request->validate([
+            'creator_user_id' => 'required|integer|exists:users,id',
+            'owner_user_id' => 'required|integer|exists:users,id',
+            'name' => 'required|string|max:128',
+        ]);
+        $request->user()->createdCoilStorages()->create($validated);
         return redirect(route('coil-storage.index'));
     }
 

@@ -11,6 +11,7 @@ class Transaction extends Model
 {
     use HasFactory, WithCreator;
     protected $fillable = [
+        'creator_user_id',
         'transaction_type_id',
         'from_storage_id',
         'to_storage_id',

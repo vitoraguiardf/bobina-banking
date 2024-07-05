@@ -27,7 +27,7 @@ defineProps([
                 <span class="text-sm text-red-700">Retirado {{ data.from_transactions_sum_quantity??0 }}</span>
             </div>
             <div class="flex flex-row-reverse">
-                <span class="text-sm text-gray-800">{{ data.user.name }}</span>
+                <span class="text-sm text-gray-800">{{ data.creator_user.name }}</span>
                 <small class="mr-2 text-sm text-gray-600">{{ dayjs(data.created_at).fromNow() }}</small>
             </div>
         </div>

@@ -14,12 +14,12 @@ defineProps([
             <p class="text-lg text-gray-800">{{ data.quantity }}</p>
             <div class="flex space-x-4">
                 <span class="text-sm text-gray-800">De:</span>
-                <span class="text-sm text-gray-800">{{ data.from_storage.user.name }} - <span class="text-sm text-gray-400">{{ data.from_storage.name }}</span></span>
+                <span class="text-sm text-gray-800">{{ data.from_storage.owner_user.name }} - <span class="text-sm text-gray-400">{{ data.from_storage.name }}</span></span>
                 <span class="text-sm text-gray-800">Para:</span>
-                <span class="text-sm text-gray-800">{{ data.to_storage.user.name }} - <span class="text-sm text-gray-400">{{ data.to_storage.name }}</span></span>
+                <span class="text-sm text-gray-800">{{ data.to_storage.owner_user.name }} - <span class="text-sm text-gray-400">{{ data.to_storage.name }}</span></span>
             </div>
             <div class="flex flex-row-reverse">
-                <span class="text-sm text-gray-800">{{ data.user.name }}</span>
+                <span class="text-sm text-gray-800">{{ data.creator_user.name }}</span>
                 <small class="mr-2 text-sm text-gray-600">{{ dayjs(data.created_at).fromNow() }}</small>
             </div>
         </div>

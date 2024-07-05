@@ -16,13 +16,13 @@ class TransactionController extends Controller
     public function index(Request $request)
     {
         return Inertia::render('Transaction/Index', [
-            'items' => $request->user()->transactionsCreated()->with([
-                'user:id,name',
-                //'fromStorage:id,name',
-                'fromStorage.user:id,name',
-                // 'toStorage:id,name',
-                'toStorage.user:id,name',
-                ])->latest()->get()
+            'items' => $request->user()->createdTransactions()->with([
+                'creatorUser:id,name',
+                'fromStorage.ownerUser:id,name',
+                'toStorage.ownerUser:id,name',
+                ])
+                ->latest()
+                ->get()
         ]);
     }
 
@@ -39,13 +39,17 @@ class TransactionController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $request->merge([
+            'creator_user_id' => $request->user()->id,
+        ]);
         $validated = $request->validate([
-            'transaction_type_id' => 'required',
-            'from_storage_id' => 'nullable',
-            'to_storage_id' => 'nullable',
+            'creator_user_id' => 'required|integer|exists:users,id',
+            'transaction_type_id' => 'required|integer|exists:coil_storages,id',
+            'from_storage_id' => 'nullable|exists:coil_storages,id',
+            'to_storage_id' => 'nullable|exists:coil_storages,id',
             'quantity' => 'required|integer|min:1',
         ]);
-        $request->user()->transactionsCreated()->create($validated);
+        Transaction::create($validated);
         return redirect(route('transaction.index'));
     }
 

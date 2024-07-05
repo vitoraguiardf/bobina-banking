@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 trait WithCreator
 {
-    function user(): BelongsTo {
-        return parent::belongsTo(User::class);
+    function creatorUser(): BelongsTo {
+        return parent::belongsTo(User::class, 'creator_user_id');
     }
 }

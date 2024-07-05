@@ -47,16 +47,16 @@ class User extends Authenticatable
         ];
     }
 
-    function coilStorage(): HasMany {
-        return $this->hasMany(CoilStorage::class);
+    function createdCoilStorages(): HasMany {
+        return $this->hasMany(CoilStorage::class, 'creator_user_id');
     }
 
-    function transactionTypes(): HasMany {
-        return $this->hasMany(TransactionType::class);
+    function createdTransactionTypes(): HasMany {
+        return $this->hasMany(TransactionType::class, 'creator_user_id');
     }
 
-    function transactionsCreated(): HasMany {
-        return $this->hasMany(Transaction::class);
+    function createdTransactions(): HasMany {
+        return $this->hasMany(Transaction::class, 'creator_user_id');
     }
 
     /**
@@ -66,7 +66,7 @@ class User extends Authenticatable
     {
         return $this->hasManyThrough(
             Transaction::class,
-            CoilStorage::class, 'user_id', 'to_storage_id', 'id', 'id');
+            CoilStorage::class, 'owner_user_id', 'to_storage_id', 'id', 'id');
     }
     
     /**
@@ -76,6 +76,6 @@ class User extends Authenticatable
     {
         return $this->hasManyThrough(
             Transaction::class,
-            CoilStorage::class, 'user_id', 'from_storage_id', 'id', 'id');
+            CoilStorage::class, 'owner_user_id', 'from_storage_id', 'id', 'id');
     }
 }
