@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CoilStorage;
 use App\Models\Transaction;
+use App\Models\TransactionType;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
@@ -31,7 +33,11 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Transaction/Create', []);
+        return Inertia::render('Transaction/Create', [
+            'type_items' => TransactionType::all(),
+            'from_items' => CoilStorage::all(),
+            'to_items' => CoilStorage::all(),
+        ]);
     }
 
     /**

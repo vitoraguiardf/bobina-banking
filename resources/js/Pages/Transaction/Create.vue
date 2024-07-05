@@ -5,15 +5,15 @@
             <h3>Transferências - Nova</h3>
             <form @submit.prevent class="mt-2">
 
-                <Select v-model="form.transaction_type_id" :options="transcationTypes" fluid
+                <Select v-model="form.transaction_type_id" :options="type_items" fluid
                     placeholder="Tipo da Transação" option-label="name" option-value="id" input-id="type" />
                 <InputFeedBack input-id="type" :errorText="form.errors.transaction_type_id"/>
                 
-                <Select v-model="form.from_storage_id" :options="fromAccounts" fluid
+                <Select v-model="form.from_storage_id" :options="from_items" fluid
                     placeholder="Conta de Saída" option-label="name" option-value="id" input-id="from" />
                 <InputFeedBack input-id="from" :errorText="form.errors.from_storage_id"/>
 
-                <Select v-model="form.to_storage_id" :options="toAccounts" fluid
+                <Select v-model="form.to_storage_id" :options="to_items" fluid
                     placeholder="Conta Destino" option-label="name" option-value="id" input-id="to" />
                 <InputFeedBack input-id="to" :errorText="form.errors.to_storage_id"/>
 
@@ -32,7 +32,6 @@
     </AuthenticatedLayout>
 </template>
 <script setup>
-import { ref } from 'vue';
 import { useForm, Head } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import InputFeedBack from '@/Components/InputFeedBack.vue'
@@ -42,22 +41,9 @@ const form = useForm({
     to_storage_id: null,
     quantity: null,
 })
-// TODO: Get data from api
-const transcationTypes = ref([
-    { name: 'Type 1', id: 1 },
-    { name: 'Type 2', id: 2 },
-]);
-// TODO: Get data from api
-const fromAccounts = ref([
-    { name: 'Origin 1', id: 1 },
-    { name: 'Origin 2', id: 2 },
-    { name: 'Origin 3', id: 3 },
-]);
-// TODO: Get data from api
-const toAccounts = ref([
-    { name: 'Destin 1', id: 1 },
-    { name: 'Destin 2', id: 2 },
-    { name: 'Destin 3', id: 3 },
-]);
-
+defineProps([
+    'type_items',
+    'from_items',
+    'to_items',
+])
 </script>
