@@ -37,7 +37,7 @@ Route::resource('coil-storage', CoilStorageController::class)
     ->middleware(['auth', 'verified']);
 
 Route::resource('transaction-types', TransactionTypeController::class)
-    ->only(['index', 'store'])
+    ->only(['index', 'store', 'create'])
     ->middleware(['auth', 'verified']);
 
 Route::resource('transaction', TransactionController::class)

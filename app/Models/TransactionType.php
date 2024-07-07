@@ -13,5 +13,7 @@ class TransactionType extends Model
         'creator_user_id',
         'name',
         'description',
+        'origin',
+        'destin'
     ];
 }

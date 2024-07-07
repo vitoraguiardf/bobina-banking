@@ -20,17 +20,8 @@ return new class extends Migration
             $table->string('name', 128);
             $table->text('description');
 
-            $table->boolean('rm_main')->default(false);
-            $table->boolean('add_main')->default(false);
-
-            $table->boolean('rm_origin')->default(false);
-            $table->boolean('add_origin')->default(false);
-
-            $table->boolean('rm_destin')->default(false);
-            $table->boolean('add_destin')->default(false);
-
-            $table->boolean('rm_void')->default(false);
-            $table->boolean('add_void')->default(false);
+            $table->boolean('origin')->nullable()->default(null);
+            $table->boolean('destin')->nullable()->default(null);
 
         });
     }

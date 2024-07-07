@@ -25,9 +25,9 @@ class TransactionTypeController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): Response
     {
-        //
+        return Inertia::render('TransactionTypes/Create', []);
     }
 
     /**
@@ -42,6 +42,8 @@ class TransactionTypeController extends Controller
             'creator_user_id' => 'required|integer|exists:users,id',
             'name' => 'required|string|max:128',
             'description' => 'max:1000',
+            'origin' => 'nullable|boolean',
+            'destin' => 'nullable|boolean',
         ]);
         TransactionType::create($validated);
         return redirect(route('transaction-types.index'));
