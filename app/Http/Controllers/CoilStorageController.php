@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\CoilStorage;
-use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Inertia\Response;
 
 class CoilStorageController extends Controller
 {
@@ -19,7 +17,16 @@ class CoilStorageController extends Controller
         return Inertia::render('CoilStorage/Index', [
             'items' => CoilStorage::query()
             ->with('creatorUser:id,name')
-            ->withSum(['fromTransactions', 'toTransactions'], 'quantity')
+            ->withSum([
+                'fromTransactions' => function ($query) {
+                    $join = $query->join('transaction_types', 'transactions.transaction_type_id', '=', 'transaction_types.id');
+                    $join->where('transaction_types.origin', '=', false);
+                },
+                'toTransactions' => function ($query) {
+                    $join = $query->join('transaction_types', 'transactions.transaction_type_id', '=', 'transaction_types.id');
+                    $join->where('transaction_types.destin', '=', true);
+                }
+            ], 'quantity')
             ->latest()
             ->get()
         ]);

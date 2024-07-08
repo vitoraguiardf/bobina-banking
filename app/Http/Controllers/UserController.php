@@ -16,7 +16,16 @@ class UserController extends Controller
     {
         return Inertia::render('User/Index', [
             'items' => User::query()
-                ->withSum(['fromTransactions', 'toTransactions'], 'quantity')
+                ->withSum([
+                    'fromTransactions' => function ($query) {
+                        $join = $query->join('transaction_types', 'transactions.transaction_type_id', '=', 'transaction_types.id');
+                        $join->where('transaction_types.origin', '=', false);
+                    },
+                    'toTransactions' => function ($query) {
+                        $join = $query->join('transaction_types', 'transactions.transaction_type_id', '=', 'transaction_types.id');
+                        $join->where('transaction_types.destin', '=', true);
+                    }
+                ], 'quantity')
                 ->latest()
                 ->get()
         ]);
