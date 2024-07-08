@@ -16,14 +16,14 @@ defineProps([
             <div class="flex flex-row-2 gap-1">
                 <Fieldset legend="Origem" class="w-full">
                     <div class="text-sm text-gray-500 flex flex-col">
-                        <span class="text-gray-700">{{ data.from_storage.owner_user.name }}</span>
-                        <span class="text-gray-500">{{ data.from_storage.name }}</span>
+                        <span class="text-gray-700">{{ data.from_storage?.owner_user?.name }}</span>
+                        <span class="text-gray-500">{{ data.from_storage?.name }}</span>
                     </div>
                 </Fieldset>
                 <Fieldset legend="Destino" class="w-full">
                     <div class="text-sm text-gray-500 flex flex-col">
-                        <span class="text-gray-700">{{ data.to_storage.owner_user.name }}</span>
-                        <span class="text-gray-500">{{ data.to_storage.name }}</span>
+                        <span class="text-gray-700">{{ data.to_storage?.owner_user?.name }}</span>
+                        <span class="text-gray-500">{{ data.to_storage?.name }}</span>
                     </div>
                 </Fieldset>
             </div>
