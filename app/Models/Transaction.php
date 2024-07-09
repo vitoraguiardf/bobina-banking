@@ -24,4 +24,7 @@ class Transaction extends Model
     function toStorage(): BelongsTo {
         return $this->belongsTo(CoilStorage::class);
     }
+    function type(): BelongsTo {
+        return $this->belongsTo(TransactionType::class, 'transaction_type_id');
+    }
 }

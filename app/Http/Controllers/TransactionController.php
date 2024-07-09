@@ -19,6 +19,7 @@ class TransactionController extends Controller
     {
         return Inertia::render('Transaction/Index', [
             'items' => $request->user()->createdTransactions()->with([
+                'type:id,name',
                 'creatorUser:id,name',
                 'fromStorage.ownerUser:id,name',
                 'toStorage.ownerUser:id,name',
