@@ -53,6 +53,7 @@ class TransactionController extends Controller
             'transaction_type_id' => 'required|integer|exists:coil_storages,id',
             'from_storage_id' => 'nullable|exists:coil_storages,id',
             'to_storage_id' => 'nullable|exists:coil_storages,id',
+            'description' => 'nullable|string|max:100',
             'quantity' => 'required|integer|min:1',
         ]);
         Transaction::create($validated);

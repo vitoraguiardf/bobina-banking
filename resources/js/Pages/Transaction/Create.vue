@@ -4,9 +4,10 @@
         <div class="max-w-2xl mx-auto p-2 sm:px-6 lg:px-4">
             <h3>Transferências - Nova</h3>
             <form @submit.prevent class="mt-2">
+                <p class="text-sm text-gray-500 text-end">Campos com * são obrigatórios</p>
 
                 <Select v-model="form.transaction_type_id" :options="type_items" fluid
-                    placeholder="Tipo da Transação" option-label="name" option-value="id" input-id="type" />
+                    placeholder="Tipo da Transação*" option-label="name" option-value="id" input-id="type" />
                 <InputFeedBack input-id="type" :errorText="form.errors.transaction_type_id"/>
                 
                 <Select v-model="form.from_storage_id" :options="from_items" fluid
@@ -17,9 +18,13 @@
                     placeholder="Conta Destino" option-label="name" option-value="id" input-id="to" />
                 <InputFeedBack input-id="to" :errorText="form.errors.to_storage_id"/>
 
-                <InputNumber v-model="form.quantity" :min="0" :max="500" fluid
-                    placeholder="Quantidade" input-id="quantity" />
+                <InputNumber v-model="form.quantity" :min="1" fluid
+                    placeholder="Quantidade*" input-id="quantity" />
                 <InputFeedBack input-id="quantity" :errorText="form.errors.quantity"/>
+
+                <InputText v-model="form.description" fluid
+                    placeholder="Descrição" input-id="description" />
+                <InputFeedBack input-id="description" :errorText="form.errors.description"/>
 
                 <div class="flex flex-auto gap-2 mt-2">
                     <Button label="Transferir" icon="pi pi-check" severity="success" fluid
@@ -39,6 +44,7 @@ const form = useForm({
     transaction_type_id: null,
     from_storage_id: null,
     to_storage_id: null,
+    description: null,
     quantity: null,
 })
 defineProps([

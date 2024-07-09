@@ -15,6 +15,7 @@ class Transaction extends Model
         'transaction_type_id',
         'from_storage_id',
         'to_storage_id',
+        'description',
         'quantity',
     ];
     function fromStorage(): BelongsTo {
