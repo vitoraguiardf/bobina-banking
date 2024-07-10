@@ -14,7 +14,6 @@ defineProps([
                 <div class="flex flex-row">
                     <div class="flex flex-col w-full">
                         <h4 class="text-lg text-gray-900">{{ data.type.name }}</h4>
-                        <span class="text-gray-400">#{{ data.id }}</span>
                     </div>
                     <span class="text-4xl text-gray-800 content-center">{{ data.quantity }}</span>
                 </div>
@@ -36,9 +35,10 @@ defineProps([
             </div>
         </div>
         <p class="text-sm text-gray-400">Informações: {{ data.description }}</p>
-        <div class="flex flex-row-reverse">
-            <span class="text-sm text-gray-800">{{ data.creator_user.name }}</span>
-            <small class="mr-2 text-sm text-gray-600">{{ dayjs(data.created_at).fromNow() }}</small>
+        <div class="flex text-sm">
+            <span class="flex-grow text-gray-400">#{{ data.id }}</span>
+            <small class="flex-none text-gray-600">{{ dayjs(data.created_at).fromNow() }}</small>
+            <span class="flex-none text-gray-800 ml-2">{{ data.creator_user.name }}</span>
         </div>
     </div>
 </template>
