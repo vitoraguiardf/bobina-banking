@@ -7,6 +7,7 @@ use App\Models\Transaction;
 use App\Models\TransactionType;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -18,11 +19,12 @@ class TransactionController extends Controller
     public function index(Request $request)
     {
         return Inertia::render('Transaction/Index', [
-            'items' => $request->user()->createdTransactions()->with([
-                'type:id,name',
-                'creatorUser:id,name',
-                'fromStorage.ownerUser:id,name',
-                'toStorage.ownerUser:id,name',
+            'items' => Transaction::query()
+                ->with([
+                    'type:id,name',
+                    'creatorUser:id,name',
+                    'fromStorage.ownerUser:id,name',
+                    'toStorage.ownerUser:id,name',
                 ])
                 ->latest()
                 ->get()
@@ -80,9 +82,18 @@ class TransactionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Transaction $transaction)
+    public function update(Request $request, Transaction $transaction): RedirectResponse
     {
-        //
+        Gate::authorize('update', $transaction);
+
+        $validated = $request->validate([
+            'description' => 'nullable|string|max:100',
+            'quantity' => 'required|integer|min:1',
+        ]);
+
+        $transaction->update($validated);
+        
+        return redirect(route('transaction.index'));
     }
 
     /**

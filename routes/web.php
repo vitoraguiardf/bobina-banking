@@ -41,7 +41,7 @@ Route::resource('transaction-types', TransactionTypeController::class)
     ->middleware(['auth', 'verified']);
 
 Route::resource('transaction', TransactionController::class)
-    ->only(['index', 'store', 'create'])
+    ->only(['index', 'store', 'update', 'create'])
     ->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';
