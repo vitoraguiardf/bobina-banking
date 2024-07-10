@@ -1,9 +1,11 @@
 <script setup>
 import InputFeedBack from '@/Components/InputFeedBack.vue'
+import { useConfirm } from 'primevue/useconfirm';
 import { useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
+const confirm = useConfirm();
 dayjs.extend(relativeTime)
 const props = defineProps([
     'data'
@@ -19,6 +21,30 @@ const items = [
         icon: 'pi pi-refresh',
         command: () => {
             editing.value = true
+        }
+    },
+    {
+        label: 'Delete',
+        icon: 'pi pi-trash',
+        command: () => {
+            confirm.require({
+                message: 'Deseja realmente remover esta transação?',
+                header: 'Confirmação',
+                icon: 'pi pi-exclamation-triangle',
+                rejectProps: {
+                    label: 'Cancelar',
+                    severity: 'warn',
+                },
+                acceptProps: {
+                    label: 'Remover'
+                },
+                accept: () => {
+                    form.delete(route('transaction.destroy', props.data.id))
+                },
+                reject: () => {
+                    // console.log('Cancelado!');
+                },
+            })
         }
     },
 ];

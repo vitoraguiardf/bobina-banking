@@ -45,7 +45,7 @@ class TransactionPolicy
      */
     public function delete(User $user, Transaction $transaction): bool
     {
-        //
+        return $this->update($user, $transaction);
     }
 
     /**

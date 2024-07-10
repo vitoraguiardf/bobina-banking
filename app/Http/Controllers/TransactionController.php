@@ -99,8 +99,12 @@ class TransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Transaction $transaction)
+    public function destroy(Transaction $transaction): RedirectResponse
     {
-        //
+        Gate::authorize('delete', $transaction);
+
+        $transaction->delete();
+
+        return redirect(route('transaction.index'));
     }
 }
