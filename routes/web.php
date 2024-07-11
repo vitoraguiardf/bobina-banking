@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CoilStorageController;
+use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\TransactionTypeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TransactionController;
@@ -30,6 +31,10 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('users', UserController::class)
     ->only(['index'])
+    ->middleware(['auth', 'verified']);
+
+Route::resource('office', OfficeController::class)
+    ->only(['index', 'store'])
     ->middleware(['auth', 'verified']);
 
 Route::resource('coil-storage', CoilStorageController::class)

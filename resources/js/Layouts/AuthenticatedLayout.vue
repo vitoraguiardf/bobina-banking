@@ -36,6 +36,9 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('users.index')" :active="route().current('users.index')">
                                     Users
                                 </NavLink>
+                                <NavLink :href="route('office.index')" :active="route().current('office.index')">
+                                    Office
+                                </NavLink>
                                 <NavLink :href="route('coil-storage.index')" :active="route().current('coil-storage.index')">
                                     Coil Storage
                                 </NavLink>
