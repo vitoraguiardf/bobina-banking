@@ -6,14 +6,13 @@ dayjs.extend(relativeTime)
 defineProps([
     'data'
 ])
+const actions = [
+    { code: 1, name: 'Sum' },
+    { code: 0, name: 'None' },
+    { code: -1, name: 'Subtract' },
+]
 function getActionName(code) {
-    if (code == true) {
-        return " Somar"
-    } else if (code == false) {
-        return " Subtrair"
-    } else if (code == null) {
-        return " Nenhuma"
-    }
+    return actions.filter((v) => (v.code==code)).pop().name
 }
 </script>
 <template>
@@ -22,8 +21,8 @@ function getActionName(code) {
         <div class="flex-1">
             <p class="text-lg text-gray-900 w-full">{{ data.name }}</p>
             <div class="flex flex-row-2 gap-2">
-                <span class="text-sm text-gray-500 w-full">Ação na conta de origem: {{ getActionName(data.origin) }}</span>
-                <span class="text-sm text-gray-500 w-full">Ação na conta de destino: {{ getActionName(data.destin) }}</span>
+                <span class="text-sm text-gray-500 w-full">Origin action: {{ getActionName(data.origin) }}</span>
+                <span class="text-sm text-gray-500 w-full">Destin action: {{ getActionName(data.destin) }}</span>
             </div>
             <p class="text-sm text-gray-400">{{ data.description }}</p>
             <div class="flex flex-row-reverse">

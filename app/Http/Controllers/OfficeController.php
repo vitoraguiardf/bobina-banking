@@ -17,6 +17,7 @@ class OfficeController extends Controller
         return Inertia::render('Office/Index', [
             'items' => Office::query()
                 ->with([
+                    'coilStorages:holder_type,holder_id,name',
                     'creatorUser:id,name',
                 ])
                 ->latest()
@@ -29,7 +30,9 @@ class OfficeController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Office/Create', [
+            
+        ]);
     }
 
     /**
@@ -43,6 +46,7 @@ class OfficeController extends Controller
 
         $validated = $request->validate([
             'creator_user_id' => 'required|integer|exists:users,id',
+            'description' => 'nullable|string|max:1000',
             'name' => 'required|string|min:10|max:150',
         ]);
 

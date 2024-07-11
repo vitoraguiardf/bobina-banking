@@ -16,13 +16,10 @@ return new class extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('creator_user_id');
             $table->foreign('creator_user_id')->references('id')->on('users');
-
             $table->string('name', 128);
             $table->text('description')->nullable();
-
-            $table->boolean('origin')->nullable()->default(null);
-            $table->boolean('destin')->nullable()->default(null);
-
+            $table->integer('origin');
+            $table->integer('destin');
         });
     }
 

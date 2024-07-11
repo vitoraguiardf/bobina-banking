@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\CoilStorageHolderTypes;
 use App\Models\CoilStorage;
+use App\Models\Office;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -20,11 +23,11 @@ class CoilStorageController extends Controller
             ->withSum([
                 'fromTransactions' => function ($query) {
                     $join = $query->join('transaction_types', 'transactions.transaction_type_id', '=', 'transaction_types.id');
-                    $join->where('transaction_types.origin', '=', false);
+                    $join->where('transaction_types.origin', '<', 0);
                 },
                 'toTransactions' => function ($query) {
                     $join = $query->join('transaction_types', 'transactions.transaction_type_id', '=', 'transaction_types.id');
-                    $join->where('transaction_types.destin', '=', true);
+                    $join->where('transaction_types.destin', '>', 0);
                 }
             ], 'quantity')
             ->latest()
@@ -37,7 +40,13 @@ class CoilStorageController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('CoilStorage/Create', [
+            'holder_types' => CoilStorageHolderTypes::cases(),
+            'holder_items' => [
+                User::class => User::select('id', 'name')->get(),
+                Office::class => Office::select('id', 'name')->get(),
+            ]
+        ]);
     }
 
     /**
@@ -51,8 +60,10 @@ class CoilStorageController extends Controller
         ]);
         $validated= $request->validate([
             'creator_user_id' => 'required|integer|exists:users,id',
-            'owner_user_id' => 'required|integer|exists:users,id',
+            'holder_type' => 'required|string',
+            'holder_id' => 'required|integer',
             'name' => 'required|string|max:128',
+            'description' => 'nullable|string|max:1000',
         ]);
         $request->user()->createdCoilStorages()->create($validated);
         return redirect(route('coil-storage.index'));

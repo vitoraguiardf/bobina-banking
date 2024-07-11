@@ -5,23 +5,32 @@ namespace App\Models;
 use App\Models\traits\WithCreator;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class CoilStorage extends Model
 {
     use HasFactory, WithCreator;
     protected $fillable = [
         'creator_user_id',
-        'owner_user_id',
-        'name'
+        'holder_type',
+        'holder_id',
+        'name',
+        'description',
     ];
 
     /**
-     * Proprietário da conta
+     * Usuário titular da conta
      */
-    function ownerUser(): BelongsTo {
-        return $this->belongsTo(User::class, 'owner_user_id');
+    function ownerUser(): MorphTo {
+        return $this->morphTo(User::class, 'holder');
+    }
+    
+    /**
+     * Escritório titular da conta
+     */
+    function ownerOffice(): MorphTo {
+        return $this->morphTo(Office::class, 'holder');
     }
 
     /**

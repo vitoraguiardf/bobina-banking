@@ -34,11 +34,11 @@ Route::resource('users', UserController::class)
     ->middleware(['auth', 'verified']);
 
 Route::resource('office', OfficeController::class)
-    ->only(['index', 'store'])
+    ->only(['index', 'create', 'store'])
     ->middleware(['auth', 'verified']);
 
 Route::resource('coil-storage', CoilStorageController::class)
-    ->only(['index', 'store'])
+    ->only(['index', 'create', 'store'])
     ->middleware(['auth', 'verified']);
 
 Route::resource('transaction-types', TransactionTypeController::class)

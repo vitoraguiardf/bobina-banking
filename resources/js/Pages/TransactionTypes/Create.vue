@@ -15,14 +15,20 @@
 
                 <Panel header="Cálculo da Conta">
                     <div class="flex flex-auto gap-2">
-                        <Fieldset legend="Origem" class="w-full">
-                            <SelectButton v-model="form.origin" :options="actions" filter
-                                optionLabel="name" optionValue="code" />
-                        </Fieldset>
-                        <Fieldset legend="Destino" class="w-full">
-                            <SelectButton v-model="form.destin" :options="actions" filter
-                                optionLabel="name" optionValue="code" />
-                        </Fieldset>
+                        <div class="flex-none">
+                            <Fieldset legend="Origem" class="w-full">
+                                <SelectButton v-model="form.origin" :options="actions" filter button-id="origin"
+                                    optionLabel="name" optionValue="code" />
+                            </Fieldset>
+                            <InputFeedBack input-id="description" :errorText="form.errors.origin"/>
+                        </div>
+                        <div class="flex-none">
+                            <Fieldset legend="Destino" class="w-full">
+                                <SelectButton v-model="form.destin" :options="actions" filter button-id="destin"
+                                    optionLabel="name" optionValue="code" />
+                            </Fieldset>
+                            <InputFeedBack input-id="description" :errorText="form.errors.destin"/>
+                        </div>
                     </div>
                 </Panel>
 
@@ -47,7 +53,8 @@ const form = useForm({
     destin: null,
 })
 const actions = [
-    { code: true, name: 'Somar' },
-    { code: false, name: 'Subtrair' },
+    { code: 1, name: 'Sum' },
+    { code: 0, name: 'None' },
+    { code: -1, name: 'Subtract' },
 ]
 </script>

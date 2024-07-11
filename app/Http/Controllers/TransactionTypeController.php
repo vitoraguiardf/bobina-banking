@@ -42,8 +42,8 @@ class TransactionTypeController extends Controller
             'creator_user_id' => 'required|integer|exists:users,id',
             'name' => 'required|string|max:128',
             'description' => 'nullable|max:1000',
-            'origin' => 'nullable|boolean',
-            'destin' => 'nullable|boolean',
+            'origin' => 'required|integer|min:-1|max:1',
+            'destin' => 'required|integer|min:-1|max:1',
         ]);
         TransactionType::create($validated);
         return redirect(route('transaction-types.index'));

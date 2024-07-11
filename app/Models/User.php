@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -66,7 +67,10 @@ class User extends Authenticatable
     {
         return $this->hasManyThrough(
             Transaction::class,
-            CoilStorage::class, 'owner_user_id', 'to_storage_id', 'id', 'id');
+            CoilStorage::class, 'holder_id', 'to_storage_id', 'id', 'id')->where(
+                'holder_type',
+                array_search(static::class, Relation::morphMap() ?: [static::class])
+            );
     }
     
     /**
@@ -76,6 +80,10 @@ class User extends Authenticatable
     {
         return $this->hasManyThrough(
             Transaction::class,
-            CoilStorage::class, 'owner_user_id', 'from_storage_id', 'id', 'id');
+            CoilStorage::class, 'holder_id', 'from_storage_id', 'id', 'id')
+            ->where(
+                'holder_type',
+                array_search(static::class, Relation::morphMap() ?: [static::class])
+            );
     }
 }

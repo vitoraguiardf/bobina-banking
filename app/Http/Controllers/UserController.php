@@ -19,11 +19,11 @@ class UserController extends Controller
                 ->withSum([
                     'fromTransactions' => function ($query) {
                         $join = $query->join('transaction_types', 'transactions.transaction_type_id', '=', 'transaction_types.id');
-                        $join->where('transaction_types.origin', '=', false);
+                        $join->where('transaction_types.origin', '>', 0);
                     },
                     'toTransactions' => function ($query) {
                         $join = $query->join('transaction_types', 'transactions.transaction_type_id', '=', 'transaction_types.id');
-                        $join->where('transaction_types.destin', '=', true);
+                        $join->where('transaction_types.destin', '<', 0);
                     }
                 ], 'quantity')
                 ->latest()

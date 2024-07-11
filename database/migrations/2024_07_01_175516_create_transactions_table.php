@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('transaction_type_id');
             $table->unsignedBigInteger('from_storage_id')->nullable();
             $table->unsignedBigInteger('to_storage_id')->nullable();
-            $table->string('description', 100);
+            $table->string('description', 100)->nullable();
             $table->unsignedInteger('quantity');
         });
     }

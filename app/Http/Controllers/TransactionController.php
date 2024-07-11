@@ -37,7 +37,7 @@ class TransactionController extends Controller
     public function create()
     {
         return Inertia::render('Transaction/Create', [
-            'type_items' => TransactionType::all(),
+            'type_items' => TransactionType::select('id', 'name', 'description', 'origin', 'destin')->get(),
             'from_items' => CoilStorage::all(),
             'to_items' => CoilStorage::all(),
         ]);
