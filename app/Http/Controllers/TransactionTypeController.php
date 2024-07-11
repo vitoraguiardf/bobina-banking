@@ -41,7 +41,7 @@ class TransactionTypeController extends Controller
         $validated = $request->validate([
             'creator_user_id' => 'required|integer|exists:users,id',
             'name' => 'required|string|max:128',
-            'description' => 'max:1000',
+            'description' => 'nullable|max:1000',
             'origin' => 'nullable|boolean',
             'destin' => 'nullable|boolean',
         ]);
