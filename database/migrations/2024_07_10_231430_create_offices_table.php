@@ -14,11 +14,9 @@ return new class extends Migration
         Schema::create('offices', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table-> unsignedBigInteger('creator_user_id');
+            $table->unsignedBigInteger('creator_user_id');
             $table->foreign('creator_user_id')->references('id')->on('users');
-
             $table->string('name');
-
         });
     }
 
