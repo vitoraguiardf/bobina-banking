@@ -14,6 +14,7 @@ const form = useForm({
     <Head title="Coil Storage" />
     <AuthenticatedLayout>
         <div class="max-w-2xl mx-auto p-2 sm:p-6 lg:p-8">
+            <h3>Coil Storages</h3>
             <form @submit.prevent="form.post(route('coil-storage.store'), { onSuccess: () => form.reset() })">
                 <div class="flex">
                     <InputText v-model="form.name" fluid input-id="description" class="flex-grow"
