@@ -1,8 +1,10 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, useForm } from '@inertiajs/vue3';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { FilterMatchMode } from '@primevue/core/api';
+import { useConfirm } from 'primevue/useconfirm';
+import { useToast } from 'primevue/usetoast'
 import { ref } from 'vue';
 import dayjs from 'dayjs';
 dayjs.extend(relativeTime)
@@ -10,11 +12,45 @@ defineProps([
     'items'
 ])
 
+// Services
+const form = useForm([]);
+const confirm = useConfirm();
+const toast = useToast();
+
+// Methods
+const destroyItem = (item) => {
+    form.delete(route('office.destroy', item.id), {
+        onSuccess: () => {
+            toast.add({ severity: 'success', summary: `Deleted`, detail: 'Successful deleted!', life: 3000 });
+        },
+    })
+}
+
+// Confirm Dialogs
+const confirmDestroy = (item) => {
+    confirm.require({
+        message: 'Are you sure you want to proceed?',
+        header: `Delete #${item.id}?`,
+        icon: 'pi pi-exclamation-triangle',
+        rejectProps: {
+            label: 'Cancel',
+            severity: 'secondary',
+            outlined: true
+        },
+        acceptProps: {
+            label: 'Delete',
+            severity: 'danger',
+            outlined: true
+        },
+        accept: () => { destroyItem(item) },
+    });
+};
+
 // Context-menu
 const ctxMenu = ref();
 const ctxItem = ref();
 const ctxModel = ref([
-    {label: 'Delete', icon: 'pi pi-fw pi-times', command: () => {}},
+    {label: 'Delete', icon: 'pi pi-fw pi-times', command: () => { confirmDestroy(ctxItem.value); }},
 ]);
 const onRowContextMenu = (event) => {
     ctxMenu.value.show(event.originalEvent);

@@ -34,7 +34,7 @@ Route::resource('users', UserController::class)
     ->middleware(['auth', 'verified']);
 
 Route::resource('office', OfficeController::class)
-    ->only(['index', 'create', 'store'])
+    ->only(['index', 'create', 'store', 'destroy'])
     ->middleware(['auth', 'verified']);
 
 Route::resource('coil-storage', CoilStorageController::class)

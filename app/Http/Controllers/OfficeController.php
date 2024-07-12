@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Office;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -82,8 +83,10 @@ class OfficeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Office $office)
+    public function destroy(Office $office): RedirectResponse
     {
-        //
+        Gate::authorize('delete', $office);
+        $office->delete();
+        return redirect(route('office.index'));
     }
 }
