@@ -23,8 +23,8 @@ class TransactionController extends Controller
                 ->with([
                     'type:id,name',
                     'creatorUser:id,name',
-                    'fromStorage.ownerUser:id,name',
-                    'toStorage.ownerUser:id,name',
+                    'fromStorage.holder:id,name',
+                    'toStorage.holder:id,name',
                 ])
                 ->latest()
                 ->get()

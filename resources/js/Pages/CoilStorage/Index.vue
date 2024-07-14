@@ -93,7 +93,7 @@ initFilters();
                                         {{ data.data.name }}
                                         &middot;
                                         <small class="text-gray-600 dark:text-gray-400">
-                                            {{ data.data.holder_type }}::{{ data.data.holder_id }}
+                                            {{ data.data.holder.name }}
                                         </small>
                                     </span>
                                     <Created :data="{creator_user, create_at, updated_at} = data.data" />

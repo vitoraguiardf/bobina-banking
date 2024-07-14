@@ -22,17 +22,10 @@ class CoilStorage extends Model
     /**
      * Usuário titular da conta
      */
-    function ownerUser(): MorphTo {
-        return $this->morphTo(User::class, 'holder');
+    function holder(): MorphTo {
+        return $this->morphTo('holder');
     }
     
-    /**
-     * Escritório titular da conta
-     */
-    function ownerOffice(): MorphTo {
-        return $this->morphTo(Office::class, 'holder');
-    }
-
     /**
      * Transações positivas/cretidatas/entrada/to_this
      */

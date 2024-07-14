@@ -20,7 +20,10 @@ class CoilStorageController extends Controller
     {
         return Inertia::render('CoilStorage/Index', [
             'items' => CoilStorage::query()
-            ->with('creatorUser:id,name')
+            ->with([
+                'creatorUser:id,name',
+                'holder:id,name',
+            ])
             ->withSum([
                 'fromTransactions' => function ($query) {
                     $join = $query->join('transaction_types', 'transactions.transaction_type_id', '=', 'transaction_types.id');

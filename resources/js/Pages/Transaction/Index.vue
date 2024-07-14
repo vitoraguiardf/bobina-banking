@@ -99,7 +99,7 @@ initFilters();
                                 <div class="flex flex-col">
                                     <template v-if="data.data.from_storage!=null">
                                         <span class="text-gray-800 dark:text-gray-200">{{ data.data.from_storage.name }}</span>
-                                        <span class="flex-row text-sm text-gray-600 dark:text-gray-400">{{ data.data.from_storage.name }}</span>
+                                        <span class="flex-row text-sm text-gray-600 dark:text-gray-400">{{ data.data.from_storage.holder.name }}</span>
                                     </template>
                                     <template v-else>
                                         <span class="text-gray-800 dark:text-gray-200">&middot;</span>
@@ -112,7 +112,7 @@ initFilters();
                                 <div class="flex flex-col">
                                     <template v-if="data.data.to_storage!=null">
                                         <span class="text-gray-800 dark:text-gray-200">{{ data.data.to_storage.name }}</span>
-                                        <span class="flex-row text-sm text-gray-600 dark:text-gray-400">{{ data.data.to_storage.name }}</span>
+                                        <span class="flex-row text-sm text-gray-600 dark:text-gray-400">{{ data.data.to_storage.holder.name }}</span>
                                     </template>
                                     <template v-else>
                                         <span class="text-gray-800 dark:text-gray-200">&middot;</span>
