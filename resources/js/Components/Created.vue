@@ -10,11 +10,12 @@ defineProps([
     <div class="flex-row text-sm text-gray-600 dark:text-gray-400">
         <small class="flex-none" v-if="data.creator_user!=null">
             <span :title="`Creator`">{{ data.creator_user.name }}</span>
+            &middot;
         </small>
         <small class="flex-none">
-            &middot;
-            <span :title="`Created at ${dayjs(data.created_at).fromNow()}`"
-                >{{ dayjs(data.created_at).fromNow() }}</span>
+            <span :title="`Created at ${dayjs(data.created_at).fromNow()}`">
+                {{ dayjs(data.created_at).fromNow() }}
+            </span>
         </small>
         <small class="flex-none" v-if="data.created_at != data.updated_at">
             &middot;
