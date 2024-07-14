@@ -1,13 +1,11 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import Created from '@/Components/Created.vue';
 import { Head, useForm } from '@inertiajs/vue3';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import { FilterMatchMode } from '@primevue/core/api';
 import { useConfirm } from 'primevue/useconfirm';
 import { useToast } from 'primevue/usetoast'
 import { ref } from 'vue';
-import dayjs from 'dayjs';
-dayjs.extend(relativeTime)
 defineProps([
     'items'
 ])
@@ -87,21 +85,12 @@ initFilters();
                     <DataTable :value="items" stripedRows removableSort sortMode="multiple"
                         contextMenu v-model:contextMenuSelection="ctxItem" @rowContextmenu="onRowContextMenu"
                         v-model:filters="filters">
-                        <Column field="id" header="#" sortable>
-                            <template #body="slotProps">
-                                <pre>{{ slotProps.data.id }}</pre>
-                            </template>
-                        </Column>
+                        <Column field="id" header="#" sortable />
                         <Column field="name" header="Office" sortable>
                             <template #body="slotProps">
-                                <div class="flex flex-row">
-                                    <div class="flex-grow">
-                                        <span class="text-gray-800 mx-1">{{ slotProps.data.name }}</span>
-                                        &middot;
-                                        <span class="text-gray-800">{{ slotProps.data.email_verified_at }}</span>
-                                        <small class="flex-none text-sm text-gray-600">{{ dayjs(slotProps.data.created_at).fromNow() }}</small>
-                                        <small class="flex-none text-sm text-gray-600" v-if="slotProps.data.created_at != slotProps.data.updated_at"> &middot; edited</small>
-                                    </div>
+                                <div class="flex flex-col">
+                                    <span class="text-gray-800 dark:text-gray-200">{{ slotProps.data.name }}</span>
+                                    <Created :data="{creator_user, create_at, updated_at} = slotProps.data" />
                                 </div>
                             </template>
                         </Column>
