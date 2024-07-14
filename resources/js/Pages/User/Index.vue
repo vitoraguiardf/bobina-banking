@@ -76,9 +76,9 @@ initFilters();
                                 </div>
                             </template>
                         </Column>
-                        <Column field="coils" header="Bobinas" sortable>
+                        <Column field="coils" header="Coils" sortable>
                             <template #body="slotProps">
-                                <span>{{ slotProps.data.to_transactions_sum_quantity - slotProps.data.from_transactions_sum_quantity }}</span>
+                                <span>{{ slotProps.data }}</span>
                             </template>
                         </Column>
                     </DataTable>

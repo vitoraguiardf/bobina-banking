@@ -96,7 +96,7 @@ initFilters();
                         </Column>
                         <Column field="coils" header="Coils" sortable>
                             <template #body="slotProps">
-                                <span>0.000</span>
+                                <span>{{ slotProps.data }}</span>
                             </template>
                         </Column>
                     </DataTable>
