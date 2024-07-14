@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\TransactionType;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -76,8 +77,10 @@ class TransactionTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(TransactionType $transactionType)
+    public function destroy(TransactionType $transactionType): RedirectResponse
     {
-        //
+        Gate::authorize('delete', $transactionType);
+        $transactionType->delete();
+        return redirect(route('transaction-types.index'));
     }
 }
