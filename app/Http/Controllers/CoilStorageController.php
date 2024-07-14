@@ -8,6 +8,7 @@ use App\Models\Office;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 
 class CoilStorageController extends Controller
@@ -96,8 +97,10 @@ class CoilStorageController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CoilStorage $coilStorage)
+    public function destroy(CoilStorage $coilStorage): RedirectResponse
     {
-        //
+        Gate::authorize('delete', $coilStorage);
+        $coilStorage->delete();
+        return redirect(route('coil-storage.index'));
     }
 }
