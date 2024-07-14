@@ -86,7 +86,7 @@ initFilters();
                         contextMenu v-model:contextMenuSelection="ctxItem" @rowContextmenu="onRowContextMenu"
                         v-model:filters="filters">
                         <Column field="id" header="#" sortable />
-                        <Column field="name" header="Transaction" sortable>
+                        <Column field="name" header="Coil Storage" sortable>
                             <template #body="data">
                                 <div class="flex flex-col">
                                     <span class="text-gray-800 dark:text-gray-200">
