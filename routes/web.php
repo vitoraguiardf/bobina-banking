@@ -38,7 +38,7 @@ Route::resource('office', OfficeController::class)
     ->middleware(['auth', 'verified']);
 
 Route::resource('coil-storage', CoilStorageController::class)
-    ->only(['index', 'create', 'store'])
+    ->only(['index', 'create', 'store', 'destroy'])
     ->middleware(['auth', 'verified']);
 
 Route::resource('transaction-types', TransactionTypeController::class)
