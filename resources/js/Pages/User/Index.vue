@@ -1,6 +1,6 @@
-
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import Created from '@/Components/Created.vue';
 import { Head } from '@inertiajs/vue3';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { FilterMatchMode } from '@primevue/core/api';
@@ -59,17 +59,20 @@ initFilters();
                         </Column>
                         <Column field="name" header="User" sortable>
                             <template #body="slotProps">
-                                <div class="flex flex-row">
-                                    <div class="flex-grow">
-                                        <span class="text-gray-800 mx-1">{{ slotProps.data.name }}</span>
+                                <div class="flex flex-col">
+                                    <span class="text-gray-800 dark:text-gray-200">
+                                        <span>{{ slotProps.data.name }}</span>
                                         &middot;
-                                        <span class="text-gray-500 mx-1">{{ slotProps.data.email }}</span>
-                                        <span v-if="slotProps.data.email_verified_at">&check;</span>
-                                        &middot;
-                                        <span class="text-gray-800">{{ slotProps.data.email_verified_at }}</span>
-                                        <small class="flex-none text-sm text-gray-600">{{ dayjs(slotProps.data.created_at).fromNow() }}</small>
-                                        <small class="flex-none text-sm text-gray-600" v-if="slotProps.data.created_at != slotProps.data.updated_at"> &middot; edited</small>
-                                    </div>
+                                        <small class="text-sm text-gray-400 dark:text-gray-600">
+                                            {{ slotProps.data.email }}
+                                            <span v-if="slotProps.data.email_verified_at"
+                                            :title="`Verified at ${dayjs(slotProps.data.email_verified_at)}`"
+                                            class="text-green-600">
+                                                &check;verified
+                                            </span>
+                                        </small>
+                                    </span>
+                                    <Created :data="{creator_user, create_at, updated_at} = slotProps.data" />
                                 </div>
                             </template>
                         </Column>
