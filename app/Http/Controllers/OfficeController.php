@@ -18,10 +18,10 @@ class OfficeController extends Controller
         return Inertia::render('Office/Index', [
             'items' => Office::query()
             ->with([
+                    'creatorUser:id,name',
+                    'coilStorages:holder_type,holder_id,name',
                     'fromTransactions',
                     'toTransactions',
-                    'coilStorages:holder_type,holder_id,name',
-                    'creatorUser:id,name',
                 ])
                 ->latest()
                 ->get()

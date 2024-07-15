@@ -16,11 +16,11 @@ class UserController extends Controller
     {
         return Inertia::render('User/Index', [
             'items' => User::query()
-                ->with(['fromTransactions', 'toTransactions'])
-                ->withSum([
+                ->with([
+                    'coilStorages:holder_type,holder_id,name',
                     'fromTransactions',
                     'toTransactions',
-                ], 'quantity')
+                    ])
                 ->latest()
                 ->get()
         ]);
