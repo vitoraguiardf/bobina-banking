@@ -18,9 +18,11 @@ class UserController extends Controller
             'items' => User::query()
                 ->with([
                     'coilStorages:holder_type,holder_id,name',
+                    ])
+                ->withSum([
                     'fromTransactions',
                     'toTransactions',
-                    ])
+                ], 'quantity')
                 ->latest()
                 ->get()
         ]);

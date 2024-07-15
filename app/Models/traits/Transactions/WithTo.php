@@ -17,10 +17,8 @@ trait WithTo
         return parent::hasManyThrough(
             Transaction::class,
             CoilStorage::class, 'holder_id', 'to_storage_id')
-            ->where(
-                'holder_type',
-                array_search(parent::class, Relation::morphMap() ?: [parent::class])
-            );
+                // array_search($this::class, Relation::morphMap() ?: array($this::class)),
+                ->where('holder_type', $this::class);
             /*->join('transaction_types', 'transactions.transaction_type_id', '=', 'transaction_types.id');
             ->where('transaction_types.destin', '<', 0);*/
     }

@@ -81,14 +81,9 @@ initFilters();
                                 <Listbox :options="slotProps.data.coil_storages" optionLabel="name" disabled/>
                             </template>
                         </Column>
-                        <Column field="from_transactions" header="FromList" sortable>
+                        <Column field="quantity" header="Coils" sortable>
                             <template #body="slotProps">
-                                <span>{{ slotProps.data.from_transactions }}</span>
-                            </template>
-                        </Column>
-                        <Column field="to_transactions" header="ToList" sortable>
-                            <template #body="slotProps">
-                                <span>{{ slotProps.data.to_transactions }}</span>
+                                <span>{{ slotProps.data.to_transactions_sum_quantity - slotProps.data.from_transactions_sum_quantity }}</span>
                             </template>
                         </Column>
                     </DataTable>
