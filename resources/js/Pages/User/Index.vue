@@ -76,9 +76,19 @@ initFilters();
                                 </div>
                             </template>
                         </Column>
-                        <Column field="coils" header="Coils" sortable>
+                        <Column field="coil-storages" header="Coil Storages" sortable>
                             <template #body="slotProps">
-                                <span>{{ slotProps.data }}</span>
+                                <Listbox :options="slotProps.data.coil_storages" optionLabel="name" disabled/>
+                            </template>
+                        </Column>
+                        <Column field="from_transactions" header="FromList" sortable>
+                            <template #body="slotProps">
+                                <span>{{ slotProps.data.from_transactions }}</span>
+                            </template>
+                        </Column>
+                        <Column field="to_transactions" header="ToList" sortable>
+                            <template #body="slotProps">
+                                <span>{{ slotProps.data.to_transactions }}</span>
                             </template>
                         </Column>
                     </DataTable>
