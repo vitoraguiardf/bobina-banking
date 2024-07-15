@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\traits\CoilStorages\WithCoilStorages;
 use App\Models\traits\Transactions\WithFrom;
 use App\Models\traits\Transactions\WithTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,7 +13,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, WithFrom, WithTo;
+    use HasFactory, Notifiable, WithFrom, WithTo, WithCoilStorages;
 
     /**
      * The attributes that are mass assignable.
