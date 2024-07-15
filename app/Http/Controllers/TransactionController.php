@@ -36,10 +36,15 @@ class TransactionController extends Controller
      */
     public function create()
     {
+        $coilStorages = 
+        CoilStorage::
+            select('id', 'name', 'holder_type', 'holder_id')
+            ->with('holder:id,name')
+            ->get();
         return Inertia::render('Transaction/Create', [
             'type_items' => TransactionType::select('id', 'name', 'description', 'origin', 'destin')->get(),
-            'from_items' => CoilStorage::all(),
-            'to_items' => CoilStorage::all(),
+            'from_items' => $coilStorages,
+            'to_items' => $coilStorages,
         ]);
     }
 
