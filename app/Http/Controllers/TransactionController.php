@@ -53,7 +53,7 @@ class TransactionController extends Controller
         ]);
         $validated = $request->validate([
             'creator_user_id' => 'required|integer|exists:users,id',
-            'transaction_type_id' => 'required|integer|exists:coil_storages,id',
+            'transaction_type_id' => 'required|integer|exists:transaction_types,id',
             'from_storage_id' => 'nullable|exists:coil_storages,id',
             'to_storage_id' => 'nullable|exists:coil_storages,id',
             'description' => 'nullable|string|max:100',

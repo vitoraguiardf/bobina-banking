@@ -3,16 +3,17 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\traits\CoilStorages\WithCoilStorages;
+use App\Models\traits\Transactions\WithFrom;
+use App\Models\traits\Transactions\WithTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, WithFrom, WithTo, WithCoilStorages;
 
     /**
      * The attributes that are mass assignable.
@@ -58,32 +59,5 @@ class User extends Authenticatable
 
     function createdTransactions(): HasMany {
         return $this->hasMany(Transaction::class, 'creator_user_id');
-    }
-
-    /**
-     * Transações positivas/cretidatas/entrada/to_this
-     */
-    public function toTransactions(): HasManyThrough
-    {
-        return $this->hasManyThrough(
-            Transaction::class,
-            CoilStorage::class, 'holder_id', 'to_storage_id', 'id', 'id')->where(
-                'holder_type',
-                array_search(static::class, Relation::morphMap() ?: [static::class])
-            );
-    }
-    
-    /**
-     * Transações negativas/debitadas/saída/from_this
-     */
-    public function fromTransactions(): HasManyThrough
-    {
-        return $this->hasManyThrough(
-            Transaction::class,
-            CoilStorage::class, 'holder_id', 'from_storage_id', 'id', 'id')
-            ->where(
-                'holder_type',
-                array_search(static::class, Relation::morphMap() ?: [static::class])
-            );
     }
 }
