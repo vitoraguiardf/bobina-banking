@@ -58,10 +58,14 @@ const form = useForm({
 })
 const loading = ref(false)
 const computed_list_from = computed(() => {
-    return props.from_items.map((i)=>({id: i.id, name: `${i.holder.name} - ${i.name}`}))
+    return props.from_items
+        .map((i)=>({id: i.id, name: `${i.holder.name} - ${i.name}`}))
+        .filter((i) => (i.id!=form.to_storage_id))
 })
 const computed_list_to = computed(() => {
-    return props.to_items.map((i)=>({id: i.id, name: `${i.holder.name} - ${i.name}`}))
+    return props.to_items
+        .map((i)=>({id: i.id, name: `${i.holder.name} - ${i.name}`}))
+        .filter((i) => (i.id!=form.from_storage_id))
 })
 const transaction_type = computed(() => {
     return props.type_items.filter((v) => (v.id===form.transaction_type_id))[0]
