@@ -6,7 +6,7 @@
             <form @submit.prevent class="mt-2">
                 <p class="text-sm text-gray-500 text-end">Campos com * são obrigatórios</p>
 
-                <Select v-model="form.transaction_type_id" :options="type_items" fluid :disabled="loading"
+                <Select v-model="form.transaction_type_id" :options="type_items" fluid :disabled="loading" :filter="type_items.length>5" checkmark
                     placeholder="Tipo da Transação*" option-label="name" option-value="id" input-id="type" />
                 <InputFeedBack input-id="type" :errorText="form.errors.transaction_type_id"/>
                 
@@ -15,12 +15,12 @@
                 </div>
 
                 <template v-if="form.transaction_type_id">
-                    <Select v-model="form.from_storage_id" :options="computed_list_from" fluid
+                    <Select v-model="form.from_storage_id" :options="computed_list_from" fluid :filter="computed_list_from.length>5" checkmark
                         :disabled="transaction_type.origin==0||loading"
                         placeholder="Conta de Saída" option-label="name" option-value="id" input-id="from" />
                     <InputFeedBack input-id="from" :errorText="form.errors.from_storage_id"/>
 
-                    <Select v-model="form.to_storage_id" :options="computed_list_to" fluid
+                    <Select v-model="form.to_storage_id" :options="computed_list_to" fluid :filter="computed_list_to.length>5" checkmark
                         :disabled="transaction_type.destin==0||loading"
                         placeholder="Conta Destino" option-label="name" option-value="id" input-id="to" />
                     <InputFeedBack input-id="to" :errorText="form.errors.to_storage_id"/>
