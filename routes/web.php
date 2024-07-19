@@ -12,9 +12,9 @@ use Inertia\Inertia;
 
 Route::get('/', fn() => Inertia::render('Welcome', [
     'canAccessControl' => Route::has('access-control.dashboard'),
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
+    'canLogin' => Route::has('login'),
+    'canRegister' => Route::has('register'),
+    'laravelVersion' => Application::VERSION,
     'phpVersion' => PHP_VERSION
 ]));
 
@@ -26,18 +26,19 @@ Route::middleware('auth')->group(function () {
     Route::middleware('verified')->group(function () {
         Route::get('/dashboard', fn () => Inertia::render('Dashboard'))
             ->name('dashboard');
-Route::resource('users', UserController::class)
+        Route::resource('users', UserController::class)
             ->only(['index']);
-Route::resource('office', OfficeController::class)
+        Route::resource('office', OfficeController::class)
             ->only(['index', 'create', 'store', 'destroy']);
-Route::resource('coil-storage', CoilStorageController::class)
+        Route::resource('coil-storage', CoilStorageController::class)
             ->only(['index', 'create', 'store', 'destroy']);
-Route::resource('transaction-types', TransactionTypeController::class)
+        Route::resource('transaction-types', TransactionTypeController::class)
             ->only(['index', 'store', 'create', 'destroy']);
-Route::resource('transaction', TransactionController::class)
+        Route::resource('transaction', TransactionController::class)
             ->only(['index', 'store', 'update', 'destroy', 'create']);
     });
     
 });
 
 require __DIR__.'/auth.php';
+require __DIR__.'/access-control.php';
