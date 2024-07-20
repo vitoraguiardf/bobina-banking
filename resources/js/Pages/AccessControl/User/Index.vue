@@ -44,7 +44,7 @@ initFilters();
                         <Button v-if="filters.global.value!=null" type="button" icon="pi pi-filter-slash" label="Clear" outlined @click="clearFilter()" />
                     </div>
                     <div class="flex-row-reverse">
-                        <Button as="a" label="Create new" :href="route('users.index')" link disabled />
+                        <Button as="a" label="Create new" :href="route('access-control.users.index')" link disabled />
                     </div> 
                 </div>
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">

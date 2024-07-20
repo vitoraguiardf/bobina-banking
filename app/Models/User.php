@@ -10,10 +10,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, WithFrom, WithTo, WithCoilStorages;
+    use HasFactory, Notifiable, WithFrom, WithTo, WithCoilStorages, HasRoles;
 
     /**
      * The attributes that are mass assignable.
