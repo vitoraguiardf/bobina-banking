@@ -17,15 +17,18 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
+        $user = User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
 
-        // Seeding default permissions
-        $this->call(PermissionSeeder::class);
         // Seeding default roles
         $this->call(RoleSeeder::class);
+        // Seeding default permissions
+        $this->call(PermissionSeeder::class);
+
+        $user->assignRole('office.admin');
+        $user->save();
 
     }
 }
