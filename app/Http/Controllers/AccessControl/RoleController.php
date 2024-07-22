@@ -17,6 +17,10 @@ class RoleController extends Controller
     {
         return Inertia::render('AccessControl/Role/Index', [
             'items' => Role::query()
+                ->with([
+                    'users',
+                    'permissions',
+                ])
                 ->latest()
                 ->get()
         ]);
@@ -43,13 +47,12 @@ class RoleController extends Controller
 
         $validated = $request->validate([
             'creator_user_id' => 'required|integer|exists:users,id',
-            'description' => 'nullable|string|max:1000',
             'name' => 'required|string|min:10|max:150',
         ]);
 
         Role::create($validated);
 
-        return redirect(route('roles.index'));
+        return redirect(route('access-control.roles.index'));
     }
 
     /**

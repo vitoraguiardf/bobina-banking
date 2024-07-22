@@ -44,8 +44,8 @@ initFilters();
                         <Button v-if="filters.global.value!=null" type="button" icon="pi pi-filter-slash" label="Clear" outlined @click="clearFilter()" />
                     </div>
                     <div class="flex-row-reverse">
-                        <Button as="a" label="Create new" :href="route('users.index')" link disabled />
-                    </div> 
+                        <Button as="a" label="Create new" :href="route('access-control.permissions.create')" link disabled />
+                    </div>
                 </div>
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <ContextMenu ref="ctxMenu" :model="ctxModel" @hide="ctxItem=null" />
@@ -57,7 +57,7 @@ initFilters();
                                 <pre>{{ slotProps.data.id }}</pre>
                             </template>
                         </Column>
-                        <Column field="name" header="User" sortable>
+                        <Column field="name" header="Permission Name" sortable>
                             <template #body="slotProps">
                                 <div class="flex flex-col">
                                     <span class="text-gray-800 dark:text-gray-200">
@@ -76,14 +76,14 @@ initFilters();
                                 </div>
                             </template>
                         </Column>
-                        <Column field="coil-storages" header="Coil Storages" sortable>
+                        <Column field="users" header="Users" sortable>
                             <template #body="slotProps">
-                                <Listbox :options="slotProps.data.coil_storages" optionLabel="name" disabled/>
+                                <Listbox :options="slotProps.data.users" optionLabel="name" disabled/>
                             </template>
                         </Column>
-                        <Column field="quantity" header="Coils" sortable>
+                        <Column field="roles" header="Roles" sortable>
                             <template #body="slotProps">
-                                <span>{{ slotProps.data.to_transactions_sum_quantity - slotProps.data.from_transactions_sum_quantity }}</span>
+                                <Listbox :options="slotProps.data.roles" optionLabel="name" disabled/>
                             </template>
                         </Column>
                     </DataTable>

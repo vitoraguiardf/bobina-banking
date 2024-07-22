@@ -76,14 +76,14 @@ initFilters();
                                 </div>
                             </template>
                         </Column>
-                        <Column field="coil-storages" header="Coil Storages" sortable>
+                        <Column field="roles" header="Roles" sortable>
                             <template #body="slotProps">
-                                <Listbox :options="slotProps.data.coil_storages" optionLabel="name" disabled/>
+                                <Listbox :options="slotProps.data.roles" optionLabel="name" disabled/>
                             </template>
                         </Column>
-                        <Column field="quantity" header="Coils" sortable>
+                        <Column field="permissions" header="Permissions" sortable>
                             <template #body="slotProps">
-                                <span>{{ slotProps.data.to_transactions_sum_quantity - slotProps.data.from_transactions_sum_quantity }}</span>
+                                <Listbox :options="slotProps.data.permissions" optionLabel="name" disabled/>
                             </template>
                         </Column>
                     </DataTable>

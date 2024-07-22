@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\AccessControl;
 
+use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
 {
@@ -17,6 +17,10 @@ class PermissionController extends Controller
     {
         return Inertia::render('AccessControl/Permission/Index', [
             'items' => Permission::query()
+                ->with([
+                    'users',
+                    'roles',
+                ])
                 ->latest()
                 ->get()
         ]);
@@ -43,13 +47,12 @@ class PermissionController extends Controller
 
         $validated = $request->validate([
             'creator_user_id' => 'required|integer|exists:users,id',
-            'description' => 'nullable|string|max:1000',
             'name' => 'required|string|min:10|max:150',
         ]);
 
         Permission::create($validated);
 
-        return redirect(route('permissions.index'));
+        return redirect(route('access-control.permissions.index'));
     }
 
     /**
