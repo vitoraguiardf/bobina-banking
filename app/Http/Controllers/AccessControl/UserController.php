@@ -16,13 +16,6 @@ class UserController extends Controller
     {
         return Inertia::render('AccessControl/User/Index', [
             'items' => User::query()
-                ->with([
-                    'coilStorages:holder_type,holder_id,name',
-                    ])
-                ->withSum([
-                    'fromTransactions',
-                    'toTransactions',
-                ], 'quantity')
                 ->latest()
                 ->get()
         ]);

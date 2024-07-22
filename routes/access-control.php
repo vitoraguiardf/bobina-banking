@@ -13,7 +13,6 @@ Route::group([
 ], function () {
     Route::get('/', fn() => Inertia::render('AccessControl/Dashboard'))->name('dashboard');
     Route::resource('users', UserController::class);
-    // Route::resource('groups', GroupsController::class);
-    // Route::resource('roles', RolesController::class);
-    // Route::resource('permissions', PermissionsController::class);
+    Route::resource('roles', RoleController::class);
+    Route::resource('permissions', PermissionController::class);
 });

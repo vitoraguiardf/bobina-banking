@@ -34,7 +34,7 @@ const clearFilter = () => {
 initFilters();
 </script>
 <template>
-<Head title="Groups" />
+<Head title="Permissions" />
     <AuthenticatedLayout>
         <div class="py-6">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
