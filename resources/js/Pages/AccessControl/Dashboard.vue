@@ -1,5 +1,5 @@
 <script setup>
-import DashboardLayout from '@/Layouts/AccessControl/DashboardLayout.vue';
+import DashboardLayout from '@/Layouts/AccessControl/Dashboard.vue';
 import { Head } from '@inertiajs/vue3';
 </script>
 

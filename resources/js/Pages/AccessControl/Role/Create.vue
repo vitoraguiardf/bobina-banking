@@ -1,6 +1,6 @@
 <template>
     <Head title="Roles - New" />
-    <AuthenticatedLayout>
+    <DashboardLayout>
         <div class="max-w-2xl mx-auto p-2 sm:px-6 lg:px-4">
             <h3>New Role</h3>
             <form @submit.prevent class="mt-2">
@@ -18,12 +18,12 @@
                 </div>
             </form>
         </div>
-    </AuthenticatedLayout>
+    </DashboardLayout>
 </template>
 <script setup>
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import { useForm, Head } from '@inertiajs/vue3';
-import AuthenticatedLayout from '@/Layouts/AccessControl/DashboardLayout.vue';
+import DashboardLayout from '@/Layouts/AccessControl/Dashboard.vue';
 import InputFeedBack from '@/Components/InputFeedBack.vue'
 const loading = ref(false)
 const form = useForm({

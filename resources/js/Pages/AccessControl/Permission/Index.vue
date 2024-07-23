@@ -1,5 +1,5 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AccessControl/DashboardLayout.vue';
+import DashboardLayout from '@/Layouts/AccessControl/Dashboard.vue';
 import Created from '@/Components/Created.vue';
 import { Head } from '@inertiajs/vue3';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -35,7 +35,7 @@ initFilters();
 </script>
 <template>
 <Head title="Permissions" />
-    <AuthenticatedLayout>
+    <DashboardLayout>
         <div class="py-6">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="flex">
@@ -90,5 +90,5 @@ initFilters();
                 </div>
             </div>
         </div>
-    </AuthenticatedLayout>
+    </DashboardLayout>
 </template>
