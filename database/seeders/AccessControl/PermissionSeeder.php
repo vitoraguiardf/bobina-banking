@@ -169,9 +169,8 @@ class PermissionSeeder extends ItemSeeder
         
         $roles = $validator->safe(['roles']);
         foreach($roles as $role) {
-            $this->command->warn('seeding role '. $role);
-            $role = Role::findByName($role);
-            $role->syncPermissions($permission->name);
+            $role = Role::findByName($role[0]);
+            $role->givePermissionTo($permission->name);
             $role->save();
         }
     }
@@ -183,6 +182,7 @@ class PermissionSeeder extends ItemSeeder
             'title' => 'required|string|max:30',
             'module' => 'required|string|max:30',
             'description' => 'required|string|max:255',
+            'roles' => 'nullable|array',
         ];
     }
 
