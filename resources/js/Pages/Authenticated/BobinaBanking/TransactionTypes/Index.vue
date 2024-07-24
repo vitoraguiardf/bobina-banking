@@ -1,5 +1,5 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import DashboardLayout from '@/Layouts/Authenticated/BobinaBanking/Dashboard.vue';
 import Created from '@/Components/Created.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import { FilterMatchMode } from '@primevue/core/api';
@@ -26,7 +26,7 @@ const toast = useToast();
 
 // Methods
 const destroyItem = (item) => {
-    form.delete(route('transaction-types.destroy', item.id), {
+    form.delete(route('bobina-banking.transaction-types.destroy', item.id), {
         onSuccess: () => {
             toast.add({ severity: 'success', summary: `Deleted`, detail: 'Successful deleted!', life: 3000 });
         },
@@ -77,7 +77,7 @@ initFilters();
 </script>
 <template>
 <Head title="Transaction Types" />
-    <AuthenticatedLayout>
+    <DashboardLayout>
         <div class="py-6">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="flex">
@@ -86,7 +86,7 @@ initFilters();
                         <Button v-if="filters.global.value!=null&&filters.global.value!=''" type="button" icon="pi pi-filter-slash" label="Clear" outlined @click="clearFilter()" />
                     </div>
                     <div class="flex-row-reverse">
-                        <Button as="a" label="Create new" :href="route('transaction-types.create')" link disabled />
+                        <Button as="a" label="Create new" :href="route('bobina-banking.transaction-types.create')" link disabled />
                     </div> 
                 </div>
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -122,5 +122,5 @@ initFilters();
                 </div>
             </div>
         </div>
-    </AuthenticatedLayout>
+    </DashboardLayout>
 </template>

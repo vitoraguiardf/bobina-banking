@@ -1,6 +1,6 @@
 <template>
     <Head title="Coil Storage - New" />
-    <AuthenticatedLayout>
+    <DashboardLayout>
         <div class="max-w-2xl mx-auto p-2 sm:px-6 lg:px-4">
             <h3>New Coil Storage</h3>
             <form @submit.prevent class="mt-2">
@@ -27,18 +27,18 @@
 
                 <div class="flex flex-auto gap-2 mt-2">
                     <Button label="Save" icon="pi pi-check" severity="success" fluid
-                        @click="form.post(route('coil-storage.store'), { onSuccess: () => form.reset() })" />
+                        @click="form.post(route('bobina-banking.coil-storage.store'), { onSuccess: () => form.reset() })" />
                     <Button as="a" label="Cancel" icon="pi pi-x" severity="warn" fluid
-                        @click="form.reset()" :href="route('coil-storage.index')" />
+                        @click="form.reset()" :href="route('bobina-banking.coil-storage.index')" />
                 </div>
             </form>
         </div>
-    </AuthenticatedLayout>
+    </DashboardLayout>
 </template>
 <script setup>
 import { computed } from 'vue';
 import { useForm, Head } from '@inertiajs/vue3';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import DashboardLayout from '@/Layouts/Authenticated/BobinaBanking/Dashboard.vue';
 import InputFeedBack from '@/Components/InputFeedBack.vue'
 const holder_type_options = computed(() => {
     return props.holder_types.map((value) => ({ id: value, name: value.split('\\').pop() }))

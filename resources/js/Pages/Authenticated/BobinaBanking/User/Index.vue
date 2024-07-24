@@ -1,5 +1,5 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import DashboardLayout from '@/Layouts/Authenticated/BobinaBanking/Dashboard.vue';
 import Created from '@/Components/Created.vue';
 import { Head } from '@inertiajs/vue3';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -35,7 +35,7 @@ initFilters();
 </script>
 <template>
 <Head title="Users" />
-    <AuthenticatedLayout>
+    <DashboardLayout>
         <div class="py-6">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="flex">
@@ -44,7 +44,7 @@ initFilters();
                         <Button v-if="filters.global.value!=null" type="button" icon="pi pi-filter-slash" label="Clear" outlined @click="clearFilter()" />
                     </div>
                     <div class="flex-row-reverse">
-                        <Button as="a" label="Create new" :href="route('users.index')" link disabled />
+                        <Button as="a" label="Create new" :href="route('bobina-banking.users.index')" link disabled />
                     </div> 
                 </div>
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -90,5 +90,5 @@ initFilters();
                 </div>
             </div>
         </div>
-    </AuthenticatedLayout>
+    </DashboardLayout>
 </template>

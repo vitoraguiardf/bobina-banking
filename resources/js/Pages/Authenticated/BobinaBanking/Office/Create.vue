@@ -1,6 +1,6 @@
 <template>
     <Head title="Office - New" />
-    <AuthenticatedLayout>
+    <DashboardLayout>
         <div class="max-w-2xl mx-auto p-2 sm:px-6 lg:px-4">
             <h3>New Office</h3>
             <form @submit.prevent class="mt-2">
@@ -16,17 +16,17 @@
 
                 <div class="flex flex-auto gap-2 mt-2">
                     <Button label="Save" icon="pi pi-check" severity="success" fluid
-                        @click="form.post(route('office.store'), { onSuccess: () => form.reset() })" />
+                        @click="form.post(route('bobina-banking.office.store'), { onSuccess: () => form.reset() })" />
                     <Button as="a" label="Cancel" icon="pi pi-x" severity="warn" fluid
-                        @click="form.reset()" :href="route('office.index')" />
+                        @click="form.reset()" :href="route('bobina-banking.office.index')" />
                 </div>
             </form>
         </div>
-    </AuthenticatedLayout>
+    </DashboardLayout>
 </template>
 <script setup>
 import { useForm, Head } from '@inertiajs/vue3';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import DashboardLayout from '@/Layouts/Authenticated/BobinaBanking/Dashboard.vue';
 import InputFeedBack from '@/Components/InputFeedBack.vue'
 const form = useForm({
     name: null,

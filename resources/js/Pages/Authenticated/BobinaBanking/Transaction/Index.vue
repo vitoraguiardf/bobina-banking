@@ -1,5 +1,5 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import DashboardLayout from '@/Layouts/Authenticated/BobinaBanking/Dashboard.vue';
 import Created from '@/Components/Created.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import { FilterMatchMode } from '@primevue/core/api';
@@ -17,7 +17,7 @@ const toast = useToast();
 
 // Methods
 const destroyItem = (item) => {
-    form.delete(route('coil-storage.destroy', item.id), {
+    form.delete(route('bobina-banking.transaction.destroy', item.id), {
         onSuccess: () => {
             toast.add({ severity: 'success', summary: `Deleted`, detail: 'Successful deleted!', life: 3000 });
         },
@@ -67,8 +67,8 @@ const clearFilter = () => {
 initFilters();
 </script>
 <template>
-<Head title="Coil Storages" />
-    <AuthenticatedLayout>
+<Head title="Transactions" />
+    <DashboardLayout>
         <div class="py-6">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="flex">
@@ -77,7 +77,7 @@ initFilters();
                         <Button v-if="filters.global.value!=null&&filters.global.value!=''" type="button" icon="pi pi-filter-slash" label="Clear" outlined @click="clearFilter()" />
                     </div>
                     <div class="flex-row-reverse">
-                        <Button as="a" label="Create new" :href="route('coil-storage.create')" link disabled />
+                        <Button as="a" label="Create new" :href="route('bobina-banking.transaction.create')" link disabled />
                     </div> 
                 </div>
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -86,28 +86,44 @@ initFilters();
                         contextMenu v-model:contextMenuSelection="ctxItem" @rowContextmenu="onRowContextMenu"
                         v-model:filters="filters">
                         <Column field="id" header="#" sortable />
-                        <Column field="name" header="Coil Storage" sortable>
+                        <Column field="type.name" header="Transaction" sortable>
                             <template #body="data">
                                 <div class="flex flex-col">
-                                    <span class="text-gray-800 dark:text-gray-200">
-                                        {{ data.data.name }}
-                                        &middot;
-                                        <small class="text-gray-600 dark:text-gray-400">
-                                            {{ data.data.holder.name }}
-                                        </small>
-                                    </span>
+                                    <span class="text-gray-800 dark:text-gray-200">{{ data.data.type.name }}</span>
                                     <Created :data="{creator_user, create_at, updated_at} = data.data" />
                                 </div>
                             </template>
                         </Column>
-                        <Column field="quantity" header="Coils" sortable>
+                        <Column field="from_storage.name" header="From" sortable>
                             <template #body="data">
-                                {{  data.data.to_transactions_sum_quantity - data.data.from_transactions_sum_quantity }}
+                                <div class="flex flex-col">
+                                    <template v-if="data.data.from_storage!=null">
+                                        <span class="text-gray-800 dark:text-gray-200">{{ data.data.from_storage.name }}</span>
+                                        <span class="flex-row text-sm text-gray-600 dark:text-gray-400">{{ data.data.from_storage.holder.name }}</span>
+                                    </template>
+                                    <template v-else>
+                                        <span class="text-gray-800 dark:text-gray-200">&middot;</span>
+                                    </template>
+                                </div>
                             </template>
                         </Column>
+                        <Column field="to_storage.name" header="To" sortable>
+                            <template #body="data">
+                                <div class="flex flex-col">
+                                    <template v-if="data.data.to_storage!=null">
+                                        <span class="text-gray-800 dark:text-gray-200">{{ data.data.to_storage.name }}</span>
+                                        <span class="flex-row text-sm text-gray-600 dark:text-gray-400">{{ data.data.to_storage.holder.name }}</span>
+                                    </template>
+                                    <template v-else>
+                                        <span class="text-gray-800 dark:text-gray-200">&middot;</span>
+                                    </template>
+                                </div>
+                            </template>
+                        </Column>
+                        <Column field="quantity" header="Coils" sortable />
                     </DataTable>
                 </div>
             </div>
         </div>
-    </AuthenticatedLayout>
+    </DashboardLayout>
 </template>

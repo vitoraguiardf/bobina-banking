@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Authenticated\BobinaBanking;
 
 use App\Models\Office;
 use Illuminate\Support\Facades\Gate;
@@ -15,7 +15,7 @@ class OfficeController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Office/Index', [
+        return Inertia::render('Authenticated/BobinaBanking/Office/Index', [
             'items' => Office::query()
                 ->with([
                     'creatorUser:id,name',
@@ -35,7 +35,7 @@ class OfficeController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Office/Create', [
+        return Inertia::render('Authenticated/BobinaBanking/Office/Create', [
             
         ]);
     }
@@ -57,7 +57,7 @@ class OfficeController extends Controller
 
         Office::create($validated);
 
-        return redirect(route('office.index'));
+        return redirect(route('bobina-banking.office.index'));
     }
 
     /**
@@ -91,6 +91,6 @@ class OfficeController extends Controller
     {
         Gate::authorize('delete', $office);
         $office->delete();
-        return redirect(route('office.index'));
+        return redirect(route('bobina-banking.office.index'));
     }
 }

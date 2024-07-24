@@ -1,6 +1,6 @@
 <template>
     <Head title="Transactions - New" />
-    <AuthenticatedLayout>
+    <DashboardLayout>
         <div class="max-w-2xl mx-auto p-2 sm:px-6 lg:px-4">
             <h3>Transactions - New</h3>
             <form @submit.prevent class="mt-2">
@@ -36,18 +36,18 @@
 
                 <div class="flex flex-auto gap-2 mt-2">
                     <Button label="Transferir" icon="pi pi-check" severity="success" fluid :loading ="loading"
-                        @click="loading=true;form.post(route('transaction.store'), { onSuccess: () => form.reset(), onFinish: () => { loading=false; } });" />
+                        @click="loading=true;form.post(route('bobina-banking.transaction.store'), { onSuccess: () => form.reset(), onFinish: () => { loading=false; } });" />
                     <Button as="a" label="Cancelar" icon="pi pi-x" severity="warn" fluid v-show="!loading"
-                        @click="form.reset()" :href="route('transaction.index')" />
+                        @click="form.reset()" :href="route('bobina-banking.transaction.index')" />
                 </div>
             </form>
         </div>
-    </AuthenticatedLayout>
+    </DashboardLayout>
 </template>
 <script setup>
 import { ref, computed } from 'vue';
 import { useForm, Head } from '@inertiajs/vue3';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import DashboardLayout from '@/Layouts/Authenticated/BobinaBanking/Dashboard.vue';
 import InputFeedBack from '@/Components/InputFeedBack.vue'
 const form = useForm({
     transaction_type_id: null,

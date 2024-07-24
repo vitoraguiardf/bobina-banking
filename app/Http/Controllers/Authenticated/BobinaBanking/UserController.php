@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Authenticated\BobinaBanking;
 
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index(Request $request): Response
     {
-        return Inertia::render('User/Index', [
+        return Inertia::render('Authenticated/BobinaBanking/User/Index', [
             'items' => User::query()
                 ->with([
                     'coilStorages:holder_type,holder_id,name',

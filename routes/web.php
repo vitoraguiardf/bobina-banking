@@ -1,11 +1,6 @@
 <?php
 
-use App\Http\Controllers\CoilStorageController;
-use App\Http\Controllers\OfficeController;
-use App\Http\Controllers\TransactionTypeController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\TransactionController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Authenticated\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,21 +19,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::middleware('verified')->group(function () {
-        Route::get('/dashboard', fn () => Inertia::render('Dashboard'))
+        Route::get('/dashboard', fn () => Inertia::render('Authenticated/Dashboard'))
             ->name('dashboard');
-        Route::resource('users', UserController::class)
-            ->only(['index']);
-        Route::resource('office', OfficeController::class)
-            ->only(['index', 'create', 'store', 'destroy']);
-        Route::resource('coil-storage', CoilStorageController::class)
-            ->only(['index', 'create', 'store', 'destroy']);
-        Route::resource('transaction-types', TransactionTypeController::class)
-            ->only(['index', 'store', 'create', 'destroy']);
-        Route::resource('transaction', TransactionController::class)
-            ->only(['index', 'store', 'update', 'destroy', 'create']);
     });
     
 });
 
 require __DIR__.'/auth.php';
 require __DIR__.'/access-control.php';
+require __DIR__.'/bobina-banking.php';

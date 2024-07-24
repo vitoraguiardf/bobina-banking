@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Authenticated\BobinaBanking;
 
 use App\Models\CoilStorage;
 use App\Models\Transaction;
@@ -18,7 +18,7 @@ class TransactionController extends Controller
      */
     public function index(Request $request)
     {
-        return Inertia::render('Transaction/Index', [
+        return Inertia::render('Authenticated/BobinaBanking/Transaction/Index', [
             'items' => Transaction::query()
                 ->with([
                     'type:id,name',
@@ -41,7 +41,7 @@ class TransactionController extends Controller
             select('id', 'name', 'holder_type', 'holder_id')
             ->with('holder:id,name')
             ->get();
-        return Inertia::render('Transaction/Create', [
+        return Inertia::render('Authenticated/BobinaBanking/Transaction/Create', [
             'type_items' => TransactionType::select('id', 'name', 'description', 'origin', 'destin')->get(),
             'from_items' => $coilStorages,
             'to_items' => $coilStorages,
@@ -65,7 +65,7 @@ class TransactionController extends Controller
             'quantity' => 'required|integer|min:1',
         ]);
         Transaction::create($validated);
-        return redirect(route('transaction.index'));
+        return redirect(route('bobina-banking.transaction.index'));
     }
 
     /**
@@ -98,7 +98,7 @@ class TransactionController extends Controller
 
         $transaction->update($validated);
         
-        return redirect(route('transaction.index'));
+        return redirect(route('bobina-banking.transaction.index'));
     }
 
     /**
@@ -110,6 +110,6 @@ class TransactionController extends Controller
 
         $transaction->delete();
 
-        return redirect(route('transaction.index'));
+        return redirect(route('bobina-banking.transaction.index'));
     }
 }

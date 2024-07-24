@@ -1,5 +1,5 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import DashboardLayout from '@/Layouts/Authenticated/BobinaBanking/Dashboard.vue';
 import Created from '@/Components/Created.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import { FilterMatchMode } from '@primevue/core/api';
@@ -17,7 +17,7 @@ const toast = useToast();
 
 // Methods
 const destroyItem = (item) => {
-    form.delete(route('office.destroy', item.id), {
+    form.delete(route('bobina-banking.coil-storage.destroy', item.id), {
         onSuccess: () => {
             toast.add({ severity: 'success', summary: `Deleted`, detail: 'Successful deleted!', life: 3000 });
         },
@@ -67,17 +67,17 @@ const clearFilter = () => {
 initFilters();
 </script>
 <template>
-<Head title="Offices" />
-    <AuthenticatedLayout>
+<Head title="Coil Storages" />
+    <DashboardLayout>
         <div class="py-6">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="flex">
                     <div class="flex-grow text-lg text-gray-800">
                         <InputText placeholder="Filter" v-model="filters.global.value"></InputText>
-                        <Button v-if="filters.global.value!=null" type="button" icon="pi pi-filter-slash" label="Clear" outlined @click="clearFilter()" />
+                        <Button v-if="filters.global.value!=null&&filters.global.value!=''" type="button" icon="pi pi-filter-slash" label="Clear" outlined @click="clearFilter()" />
                     </div>
                     <div class="flex-row-reverse">
-                        <Button as="a" label="Create new" :href="route('office.create')" link disabled />
+                        <Button as="a" label="Create new" :href="route('bobina-banking.coil-storage.create')" link disabled />
                     </div> 
                 </div>
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -86,27 +86,28 @@ initFilters();
                         contextMenu v-model:contextMenuSelection="ctxItem" @rowContextmenu="onRowContextMenu"
                         v-model:filters="filters">
                         <Column field="id" header="#" sortable />
-                        <Column field="name" header="Office" sortable>
-                            <template #body="slotProps">
+                        <Column field="name" header="Coil Storage" sortable>
+                            <template #body="data">
                                 <div class="flex flex-col">
-                                    <span class="text-gray-800 dark:text-gray-200">{{ slotProps.data.name }}</span>
-                                    <Created :data="{creator_user, create_at, updated_at} = slotProps.data" />
+                                    <span class="text-gray-800 dark:text-gray-200">
+                                        {{ data.data.name }}
+                                        &middot;
+                                        <small class="text-gray-600 dark:text-gray-400">
+                                            {{ data.data.holder.name }}
+                                        </small>
+                                    </span>
+                                    <Created :data="{creator_user, create_at, updated_at} = data.data" />
                                 </div>
                             </template>
                         </Column>
-                        <Column field="coil-storages" header="Coil Storages" sortable>
-                            <template #body="slotProps">
-                                <Listbox :options="slotProps.data.coil_storages" optionLabel="name" disabled/>
-                            </template>
-                        </Column>
                         <Column field="quantity" header="Coils" sortable>
-                            <template #body="slotProps">
-                                <span>{{ slotProps.data.to_transactions_sum_quantity - slotProps.data.from_transactions_sum_quantity }}</span>
+                            <template #body="data">
+                                {{  data.data.to_transactions_sum_quantity - data.data.from_transactions_sum_quantity }}
                             </template>
                         </Column>
                     </DataTable>
                 </div>
             </div>
         </div>
-    </AuthenticatedLayout>
+    </DashboardLayout>
 </template>

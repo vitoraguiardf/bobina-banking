@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Authenticated\BobinaBanking;
 
 use App\Models\TransactionType;
 use Illuminate\Http\RedirectResponse;
@@ -16,7 +16,7 @@ class TransactionTypeController extends Controller
      */
     public function index(Request $request): Response
     {
-        return Inertia::render('TransactionTypes/Index', [
+        return Inertia::render('Authenticated/BobinaBanking/TransactionTypes/Index', [
             'items' => TransactionType::with('creatorUser:id,name')
                 ->latest()
                 ->get()
@@ -28,7 +28,7 @@ class TransactionTypeController extends Controller
      */
     public function create(): Response
     {
-        return Inertia::render('TransactionTypes/Create', []);
+        return Inertia::render('Authenticated/BobinaBanking/TransactionTypes/Create', []);
     }
 
     /**
@@ -47,7 +47,7 @@ class TransactionTypeController extends Controller
             'destin' => 'required|integer|min:-1|max:1',
         ]);
         TransactionType::create($validated);
-        return redirect(route('transaction-types.index'));
+        return redirect(route('bobina-banking.transaction-types.index'));
     }
 
     /**
@@ -81,6 +81,6 @@ class TransactionTypeController extends Controller
     {
         Gate::authorize('delete', $transactionType);
         $transactionType->delete();
-        return redirect(route('transaction-types.index'));
+        return redirect(route('bobina-banking.transaction-types.index'));
     }
 }

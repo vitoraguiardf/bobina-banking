@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Authenticated\BobinaBanking;
 
 use App\CoilStorageHolderTypes;
 use App\Models\CoilStorage;
@@ -18,7 +18,7 @@ class CoilStorageController extends Controller
      */
     public function index(Request $request)
     {
-        return Inertia::render('CoilStorage/Index', [
+        return Inertia::render('Authenticated/BobinaBanking/CoilStorage/Index', [
             'items' => CoilStorage::query()
             ->with([
                 'creatorUser:id,name',
@@ -44,7 +44,7 @@ class CoilStorageController extends Controller
      */
     public function create()
     {
-        return Inertia::render('CoilStorage/Create', [
+        return Inertia::render('Authenticated/BobinaBanking/CoilStorage/Create', [
             'holder_types' => CoilStorageHolderTypes::cases(),
             'holder_items' => [
                 User::class => User::select('id', 'name')->get(),
@@ -70,7 +70,7 @@ class CoilStorageController extends Controller
             'description' => 'nullable|string|max:1000',
         ]);
         $request->user()->createdCoilStorages()->create($validated);
-        return redirect(route('coil-storage.index'));
+        return redirect(route('bobina-banking.coil-storage.index'));
     }
 
     /**
@@ -104,6 +104,6 @@ class CoilStorageController extends Controller
     {
         Gate::authorize('delete', $coilStorage);
         $coilStorage->delete();
-        return redirect(route('coil-storage.index'));
+        return redirect(route('bobina-banking.coil-storage.index'));
     }
 }

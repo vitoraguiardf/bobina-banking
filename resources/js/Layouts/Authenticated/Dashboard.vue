@@ -10,9 +10,9 @@ const navOptions = {
     },
     navItems: [
         {
-            name: 'Dashboard',
-            route: route('dashboard'),
-            active: route().current('dashboard'),
+            name: 'BobinaBanking',
+            route: route('bobina-banking.dashboard'),
+            active: route().current('bobina-banking.dashboard'),
             hasAccess: true,
         },
     ],
