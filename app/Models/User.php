@@ -50,6 +50,10 @@ class User extends Authenticatable
         ];
     }
 
+    function createdOffices(): HasMany {
+        return $this->hasMany(Office::class, 'creator_user_id');
+    }
+
     function createdCoilStorages(): HasMany {
         return $this->hasMany(CoilStorage::class, 'creator_user_id');
     }
