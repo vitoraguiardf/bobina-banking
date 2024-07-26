@@ -3,9 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Database\Seeders\AccessControl\PermissionSeeder;
-use Database\Seeders\AccessControl\RoleSeeder;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Seeders\Seeder as RootSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,20 +13,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        
+        // Access-Control
+        $this->call(PermissionsSeeder::class);
 
-        $user = User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // Users
+        $this->call(RootSeeder::class);
+        User::factory(49)->create();
 
-        // Seeding default roles
-        $this->call(RoleSeeder::class);
-        // Seeding default permissions
-        $this->call(PermissionSeeder::class);
-
-        $user->assignRole('office.admin');
-        $user->save();
-
+        // BobinaBanking
+        $this->call(BobinaBankingSeeder::class);
+        $this->call(BobinaBankingTestsSeeder::class);
+        
     }
 }
