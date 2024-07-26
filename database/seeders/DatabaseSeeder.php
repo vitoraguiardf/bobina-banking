@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Seeders\Seeder as RootSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,11 +13,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        
+        // Access-Control
+        $this->call(PermissionsSeeder::class);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // Users
+        $this->call(RootSeeder::class);
+        User::factory(49)->create();
+
+        // BobinaBanking
+        $this->call(BobinaBankingSeeder::class);
+        $this->call(BobinaBankingTestsSeeder::class);
+        
     }
 }
