@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\AccessControl;
 
 use Spatie\Permission\Models\Permission;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -17,7 +15,7 @@ class PermissionController extends Controller
     {
         return Inertia::render('AccessControl/Permission/Index', [
             'items' => Permission::query()
-                ->with([
+                ->withCount([
                     'users',
                     'roles',
                 ])
@@ -31,28 +29,15 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        return Inertia::render('AccessControl/Permission/Create', [
-            
-        ]);
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
-        $request->merge([
-            'creator_user_id' => $request->user()->id,
-        ]);        
-
-        $validated = $request->validate([
-            'creator_user_id' => 'required|integer|exists:users,id',
-            'name' => 'required|string|min:10|max:150',
-        ]);
-
-        Permission::create($validated);
-
-        return redirect(route('access-control.permissions.index'));
+        //
     }
 
     /**
@@ -82,10 +67,8 @@ class PermissionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Permission $permission): RedirectResponse
+    public function destroy(Permission $permission)
     {
-        Gate::authorize('delete', $permission);
-        $permission->delete();
-        return redirect(route('permissions.index'));
+        //
     }
 }

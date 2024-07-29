@@ -16,7 +16,7 @@ class UserController extends Controller
     {
         return Inertia::render('AccessControl/User/Index', [
             'items' => User::query()
-                ->with([
+                ->withCount([
                     'permissions',
                     'roles',
                 ])

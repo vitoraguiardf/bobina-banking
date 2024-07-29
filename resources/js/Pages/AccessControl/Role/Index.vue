@@ -76,16 +76,8 @@ initFilters();
                                 </div>
                             </template>
                         </Column>
-                        <Column field="users" header="Users" sortable>
-                            <template #body="slotProps">
-                                <Listbox :options="slotProps.data.users" optionLabel="name" disabled/>
-                            </template>
-                        </Column>
-                        <Column field="permissions" header="Permissions" sortable>
-                            <template #body="slotProps">
-                                <Listbox :options="slotProps.data.permissions" optionLabel="name" disabled/>
-                            </template>
-                        </Column>
+                        <Column field="users_count" header="Users" sortable></Column>
+                        <Column field="permissions_count" header="Permissions" sortable></Column>
                     </DataTable>
                 </div>
             </div>
