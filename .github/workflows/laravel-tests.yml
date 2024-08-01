@@ -50,6 +50,11 @@ jobs:
         touch database/database.sqlite
         php artisan migrate
 
+    - name: Preparando os assets
+      run: |
+        npm install
+        npm run build
+
     - name: Executando testes do artesão
       env:
         DB_CONNECTION: sqlite
