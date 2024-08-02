@@ -19,6 +19,11 @@ composer install && npm install
 # Construa os assets
 npm run build
 
+# Prepare o aplicativo
+php -r "file_exists('.env') || copy('.env.example', '.env');"
+php artisan key:generate
+php artisan config:clear
+
 # Prepare o banco de dados
 php artisan migrate --seed
 
