@@ -24,6 +24,10 @@ defineProps({
 </script>
 <template>
     <Head title="Welcome" />
-    <SiteHeader :canLogin="canLogin" :canRegister="canRegister"></SiteHeader>
-    <SiteFooter :phpVersion="phpVersion" :laravelVersion="laravelVersion"></SiteFooter>
+    <section>
+        <div style="background-image: url('images/background.jpg');" class="fixed left-0 top-0 w-full h-screen">
+            <SiteHeader :canLogin="canLogin" :canRegister="canRegister"></SiteHeader>
+            <SiteFooter :phpVersion="phpVersion" :laravelVersion="laravelVersion"></SiteFooter>
+        </div>
+    </section>
 </template>

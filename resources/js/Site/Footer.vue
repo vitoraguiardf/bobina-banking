@@ -13,7 +13,7 @@ defineProps({
 <template>
     <footer>
         <div class="absolute left-0 bottom-0 w-full">
-            <div class="text-lg font-medium text-center text-gray-700">
+            <div class="text-lg font-medium text-center text-gray-500">
                 Laravel v{{ laravelVersion }} (PHP v{{ phpVersion }})
             </div>
         </div>
