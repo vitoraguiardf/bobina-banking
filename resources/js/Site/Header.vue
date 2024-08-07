@@ -12,7 +12,7 @@ defineProps({
 </script>
 <template>
     <header>
-        <nav v-if="canLogin" class="-mx-3 flex flex-1 justify-end">
+        <nav v-if="canLogin" class="px-3 flex flex-1 justify-end">
             <Link v-if="$page.props.auth.user" :href="route('dashboard')"
                 class="rounded-md px-3 py-2 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20] text-gray-200 dark:hover:text-white"
             >Dashboard</Link>
