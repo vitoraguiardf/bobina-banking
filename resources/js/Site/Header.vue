@@ -11,8 +11,8 @@ defineProps({
 });
 </script>
 <template>
-    <header>
-        <div class="absolute top-0 w-full">
+    <header class="snap-start">
+        <div class="relative left-0 top-0 w-full">
             <nav v-if="canLogin" class="px-3 flex flex-1 justify-end">
                 <Link v-if="$page.props.auth.user" :href="route('dashboard')"
                     class="rounded-md px-3 py-2 ring-1 ring-transparent transition focus:outline-none focus-visible:ring-[#FF2D20] text-gray-500 hover:text-gray-300 dark:hover:text-white"
@@ -27,9 +27,10 @@ defineProps({
                     >Register</Link>
                 </template>
             </nav>
-            <div class="text-5xl h-16 py-16">
-                <h1 class="font-medium text-center text-gray-300">Bobina Banking</h1>
-            </div>
+            <section class="text-5xl h-screen content-center">
+                <h1 class="font-medium text-center text-gray-200 py-5">Bobina Banking</h1>
+                <h3 class="text-center text-2xl text-gray-400 py-5">Desbloqueando seu potencial de gerencimento</h3>
+            </section>
         </div>
     </header>
 </template>
