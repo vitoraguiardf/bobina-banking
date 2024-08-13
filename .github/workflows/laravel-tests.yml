@@ -1,0 +1,83 @@
+name: Laravel Tests
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  laravel-tests:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Preparando o PHP ${{ steps.setup-php.outputs.php-version }}
+      id: setup-php
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        extensions: curl, sqlite3, mbstring, dom, fileinfo
+        coverage: xdebug
+
+    - name: Buscando caminho de cache do composer
+      id: composer-cache
+      run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+    - name: Carregando o cache do composer
+      uses: actions/cache@v3
+      with:
+        path: ${{ steps.composer-cache.outputs.dir }}
+        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+        restore-keys: ${{ runner.os }}-composer-
+
+    - name: Instalando dependências do composer
+      run: composer install --no-interaction --no-progress --prefer-dist --optimize-autoloader
+
+    - name: Preparando inicialização do aplicativo
+      run: |
+        php -r "file_exists('.env') || copy('.env.example', '.env');"
+        php artisan key:generate
+        php artisan config:clear
+        chmod -R 777 storage bootstrap/cache
+        
+    - name: Preparando base de dados
+      run: |
+        mkdir -p database
+        touch database/database.sqlite
+        php artisan migrate
+
+    - name: Setup Node
+      id: setup-node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+        cache: 'npm'
+
+    - name: Preparando os assets
+      run: |
+        npm install
+        npm run build
+
+    - name: Executando testes do artesão
+      env:
+        DB_CONNECTION: sqlite
+        DB_DATABASE: database/database.sqlite
+      run: php artisan test
+
+    - name: 📂 Sync files to production
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: ${{ secrets.ftp_server }}
+        username: ${{ secrets.ftp_username }}
+        password: ${{ secrets.ftp_password }}
+        protocol: ftps
+        port: ${{ secrets.ftp_port }}
+        exclude: |
+          **/.git*
+          **/.git*/**
+          **/node_modules/**
+          **/vendor/**

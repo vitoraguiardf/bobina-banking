@@ -11,8 +11,19 @@ Route::group([
     'prefix' => 'access-control',
     'middleware' => ['auth', 'web', 'auth:web', 'verified', 'role:office.admin'],
 ], function () {
-    Route::get('/', fn() => Inertia::render('AccessControl/Dashboard'))->name('dashboard');
-    Route::middleware('permission:acl.users.index')->resource('users', UserController::class);
-    Route::middleware('permission:acl.roles.index')->resource('roles', RoleController::class);
-    Route::middleware('permission:acl.permissions.index')->resource('permissions', PermissionController::class);
+    Route::middleware('permission:access-control.dashboard')
+        ->get('/', fn() => Inertia::render('AccessControl/Dashboard'))
+        ->name('dashboard');
+    
+    foreach (['index'] as $method)
+        Route::middleware("permission:access-control.users.$method")
+            ->resource('users', UserController::class)->only($method);
+    
+    foreach (['index', 'create', 'store', 'destroy'] as $method)
+        Route::middleware("permission:access-control.roles.$method")
+            ->resource('roles', RoleController::class)->only($method);
+    
+    foreach (['index'] as $method)
+        Route::middleware("permission:access-control.permissions.$method")
+            ->resource('permissions', PermissionController::class)->only($method);
 });

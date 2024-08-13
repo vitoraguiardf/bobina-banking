@@ -1,4 +1,5 @@
 # Bobina Banking
+![Laravel Tests][gha_laravel-tests]
 
 Este é um aplicativo para automatizar o controle de estoque e distribuição de bobinas da minha equipe.
 
@@ -18,6 +19,11 @@ composer install && npm install
 # Construa os assets
 npm run build
 
+# Prepare o aplicativo
+php -r "file_exists('.env') || copy('.env.example', '.env');"
+php artisan key:generate
+php artisan config:clear
+
 # Prepare o banco de dados
 php artisan migrate --seed
 
@@ -28,3 +34,4 @@ php artisan serve
 * PHP ^8.2
 * NPM ^9.2
 
+[gha_laravel-tests]: https://github.com/vitoraguiardf/bobina-banking/actions/workflows/laravel-tests.yml/badge.svg

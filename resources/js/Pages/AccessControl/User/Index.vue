@@ -43,9 +43,6 @@ initFilters();
                         <InputText placeholder="Filter" v-model="filters.global.value"></InputText>
                         <Button v-if="filters.global.value!=null" type="button" icon="pi pi-filter-slash" label="Clear" outlined @click="clearFilter()" />
                     </div>
-                    <div class="flex-row-reverse">
-                        <Button as="a" label="Create new" :href="route('access-control.users.index')" link disabled />
-                    </div> 
                 </div>
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <ContextMenu ref="ctxMenu" :model="ctxModel" @hide="ctxItem=null" />
@@ -76,16 +73,8 @@ initFilters();
                                 </div>
                             </template>
                         </Column>
-                        <Column field="roles" header="Roles" sortable>
-                            <template #body="slotProps">
-                                <Listbox :options="slotProps.data.roles" optionLabel="name" disabled/>
-                            </template>
-                        </Column>
-                        <Column field="permissions" header="Permissions" sortable>
-                            <template #body="slotProps">
-                                <Listbox :options="slotProps.data.permissions" optionLabel="name" disabled/>
-                            </template>
-                        </Column>
+                        <Column field="roles_count" header="Roles" sortable></Column>
+                        <Column field="permissions_count" header="Permissions" sortable></Column>
                     </DataTable>
                 </div>
             </div>
