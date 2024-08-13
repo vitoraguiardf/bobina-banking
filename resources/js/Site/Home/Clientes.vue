@@ -3,10 +3,10 @@ import Header from '@/Components/Header.vue';
 
 </script>
 <template>
-    <section class="w-full min-h-screen snap-start bg-pink-200 dark:bg-pink-800 p-2">
+    <section class="relative w-full min-h-screen snap-start bg-pink-200 dark:bg-pink-800 p-2">
         <Header id="clientes" tag="3">Nossos Clientes</Header>
         <p>Consectetuer adipiscing elit. Ut justo porta placerat per gravida fusce eleifend. Felis curabitur efficitur libero cubilia aliquet hendrerit nisi quis. Hac porta cubilia tristique vulputate at urna quisque vestibulum. Aenean euismod euismod sodales semper suscipit pellentesque est. Facilisi senectus scelerisque condimentum varius hac gravida. Lobortis nibh conubia ipsum posuere maximus. Dictumst curae litora viverra donec; egestas consequat morbi potenti. Habitant metus enim pharetra, lacus ante cubilia blandit! Justo ullamcorper potenti ad nisi cras dignissim duis.</p>
-        <div class="relative left-0 bottom-0 w-full flex overflow-hidden space-x-16 group">
+        <div class="absolute left-0 bottom-0 w-full flex overflow-hidden space-x-16 group">
             <div class="flex space-x-16 animate-loop-scroll group-hover:paused">
                 <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/8ee9f161-df19-4fa7-a2a6-edf9acf0e0d6?apiKey=7e8b177c7c374d8abaf3aebf27f1c17d&" class="max-w-none" alt="Image 1" />
                 <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/80480f8a-69ad-4c30-88ba-f4e7ee08fc51?apiKey=7e8b177c7c374d8abaf3aebf27f1c17d&" class="max-w-none" alt="Image 2" />

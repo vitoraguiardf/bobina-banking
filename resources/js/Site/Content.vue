@@ -8,15 +8,15 @@ import Presenca from './Home/Presenca.vue';
 <template>
     <main class="text-base text-black dark:text-white">
         
-        <Tecnologia></Tecnologia>
+        <!-- <Tecnologia></Tecnologia> -->
         
-        <Clientes></Clientes>
+        <!-- <Clientes></Clientes> -->
         
-        <Presenca></Presenca>
+        <!-- <Presenca></Presenca> -->
         
-        <Sustentabilidade></Sustentabilidade>
+        <!-- <Sustentabilidade></Sustentabilidade> -->
         
-        <Recrutamento></Recrutamento>
+        <!-- <Recrutamento></Recrutamento> -->
         
         <h3 class="absolute left-0 top-10 w-full text-center text-2xl text-red-500">SITE EM MANUTENÇÃO</h3>
 
