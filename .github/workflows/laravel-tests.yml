@@ -41,7 +41,16 @@ jobs:
       run: |
         php -r "file_exists('.env') || copy('.env.example', '.env');"
         php artisan key:generate
+        php artisan jwt:secret
+
+    - name: Limpando Cache
+      run: |
+        php artisan cache:clear
         php artisan config:clear
+        php artisan route:clear
+        php artisan view:clear
+        php artisan optimize:clear
+        php artisan permission:cache-reset
         chmod -R 777 storage bootstrap/cache
         
     - name: Preparando base de dados
