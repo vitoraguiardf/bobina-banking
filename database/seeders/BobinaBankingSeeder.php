@@ -32,20 +32,20 @@ class BobinaBankingSeeder extends Seeder
 
         // Cria os Tipos de Transações
         static::$ROOT_USER->createdTransactionTypes()->create([
-            'name' => 'Recebimento de Pedido',
+            'name' => 'Recebimento',
             'description' => 'Lancamento para quando um novo pedido é recebido do fornecedor!',
             'origin' => 0,
             'destin' => 1,
         ]);
         static::$ROOT_USER->createdTransactionTypes()->create([
-            'name' => 'Transferência entre armazenamentos',
-            'description' => '...!',
+            'name' => 'Transferência',
+            'description' => 'Registra tranferências entre armazéns!',
             'origin' => -1,
             'destin' => 1,
         ]);
         static::$ROOT_USER->createdTransactionTypes()->create([
-            'name' => '',
-            'description' => 'Utilização de bobinas para controle da quantidade de impressões!',
+            'name' => 'Utilização',
+            'description' => 'Registra o uso de bobinas para controle da quantidade de impressões!',
             'origin' => -1,
             'destin' => 0,
         ]);
