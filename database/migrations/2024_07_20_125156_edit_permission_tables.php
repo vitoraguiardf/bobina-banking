@@ -17,13 +17,13 @@ return new class extends Migration
         }
 
         Schema::table($tableNames['permissions'], function (Blueprint $table) {
-            $table->string('title', 30)->nullable();
+            $table->string('title', 50)->nullable();
             $table->string('module', 30)->nullable();
             $table->string('description', 255)->nullable();
         });
 
         Schema::table($tableNames['roles'], function (Blueprint $table) {
-            $table->string('title', 30)->nullable();
+            $table->string('title', 50)->nullable();
             $table->string('description', 255)->nullable();
         });
     }
