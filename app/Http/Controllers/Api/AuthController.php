@@ -48,7 +48,7 @@ class AuthController extends Controller implements HasMiddleware {
      */
     public function logout()
     {
-        auth('api')->logout();
+        auth('api')->logout(true);
 
         return response()->json(['message' => 'Successfully logged out']);
     }
