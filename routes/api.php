@@ -16,4 +16,11 @@ Route::group([
         Route::name('me')->post('me', 'AuthController@me');
     });
 
+    // bobina-banking-mobile
+    Route::group(['as' => 'bobina-banking.', 'prefix' => 'bobina-banking'], function () {
+        Route::name('resume')->get('resume', 'BobinaBankingController@resume');
+        Route::name('transactions')->get('transactions', 'BobinaBankingController@transactions');
+        Route::apiResource('transaction-type', 'TransactionTypeController')->only('index');
+    });
+
 });
