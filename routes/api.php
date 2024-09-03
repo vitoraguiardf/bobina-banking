@@ -21,6 +21,7 @@ Route::group([
         Route::name('resume')->get('resume', 'BobinaBankingController@resume');
         Route::name('transactions')->get('transactions', 'BobinaBankingController@transactions');
         Route::apiResource('transaction-type', 'TransactionTypeController')->only('index');
+        Route::apiResource('accounts', 'AccountsController')->only('index');
     });
 
 });
