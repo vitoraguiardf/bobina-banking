@@ -20,8 +20,10 @@ Route::group([
     Route::group(['as' => 'bobina-banking.', 'prefix' => 'bobina-banking'], function () {
         Route::name('resume')->get('resume', 'BobinaBankingController@resume');
         Route::name('transactions')->get('transactions', 'BobinaBankingController@transactions');
+        //Route::name('search-account')->post('search-account', 'BobinaBankingController@searchAccount');
         Route::apiResource('transaction-type', 'TransactionTypeController')->only('index');
         Route::apiResource('accounts', 'AccountsController')->only('index');
+        Route::name('accounts.search')->post('accounts/search', 'BobinaBankingController@searchAccount');
     });
 
 });
