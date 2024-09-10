@@ -20,10 +20,25 @@ class CoilStorage extends Model
     ];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['holder_name'];
+
+    /**
      * Usuário titular da conta
      */
     function holder(): MorphTo {
         return $this->morphTo('holder');
+    }
+    
+    /**
+     * Nome do titular da conta
+     */
+    function getHolderNameAttribute() {
+        $holder = $this->holder;
+        return $holder ? $holder->name : null;
     }
     
     /**

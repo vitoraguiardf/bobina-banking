@@ -12,8 +12,7 @@ class AccountsController extends Controller
      */
     public function index()
     {
-        $query = CoilStorage::query()
-            ->select(['id', 'name']);
+        $query = CoilStorage::query();
         return response()->json($query->get());
     }
 
