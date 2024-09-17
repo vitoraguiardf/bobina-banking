@@ -4,9 +4,9 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Tymon\JWTAuth\Contracts\JWTSubject;
-use App\Models\traits\CoilStorages\WithCoilStorages;
-use App\Models\traits\Transactions\WithFrom;
-use App\Models\traits\Transactions\WithTo;
+use App\Models\traits\WithFromTransactions;
+use App\Models\traits\WithHoldedAccounts;
+use App\Models\traits\WithToTransactions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -16,7 +16,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use HasFactory, Notifiable, WithFrom, WithTo, WithCoilStorages, HasRoles;
+    use HasFactory, Notifiable, WithFromTransactions, WithToTransactions, WithHoldedAccounts, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -87,8 +87,8 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Office::class, 'creator_user_id');
     }
 
-    function createdCoilStorages(): HasMany {
-        return $this->hasMany(CoilStorage::class, 'creator_user_id');
+    function createdAccounts(): HasMany {
+        return $this->hasMany(Account::class, 'creator_user_id');
     }
 
     function createdTransactionTypes(): HasMany {

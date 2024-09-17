@@ -1,8 +1,8 @@
 <template>
-    <Head title="Coil Storage - New" />
+    <Head title="Account - New" />
     <DashboardLayout>
         <div class="max-w-2xl mx-auto p-2 sm:px-6 lg:px-4">
-            <h3>New Coil Storage</h3>
+            <h3>New Account</h3>
             <form @submit.prevent class="mt-2">
                 <p class="text-sm text-gray-500 text-end">Campos com * são obrigatórios</p>
                 
@@ -27,9 +27,9 @@
 
                 <div class="flex flex-auto gap-2 mt-2">
                     <Button label="Save" icon="pi pi-check" severity="success" fluid
-                        @click="form.post(route('bobina-banking.coil-storage.store'), { onSuccess: () => form.reset() })" />
+                        @click="form.post(route('bobina-banking.accounts.store'), { onSuccess: () => form.reset() })" />
                     <Button as="a" label="Cancel" icon="pi pi-x" severity="warn" fluid
-                        @click="form.reset()" :href="route('bobina-banking.coil-storage.index')" />
+                        @click="form.reset()" :href="route('bobina-banking.accounts.index')" />
                 </div>
             </form>
         </div>

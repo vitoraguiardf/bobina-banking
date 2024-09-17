@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\CoilStorage;
+use App\Models\Account;
 use Illuminate\Http\Request;
 use App\Models\Transaction;
 use App\Models\User;
@@ -14,7 +14,7 @@ class BobinaBankingController extends Controller {
         $user = User::query()
                 ->select(['id', 'name', 'email'])
                 ->with([
-                    'coilStorages:holder_type,holder_id,name',
+                    'accounts:holder_type,holder_id,name',
                 ])
                 ->withSum([
                     'fromTransactions',
@@ -28,10 +28,10 @@ class BobinaBankingController extends Controller {
         $transactions = Transaction::query()
             ->with(
                 'type:id,name,origin,destin',
-                'fromStorage:id,name',
-                'toStorage:id,name',
-                'fromStorage.holder:type,id',
-                'toStorage.holder:type,id',
+                'fromAccounts:id,name',
+                'toAccounts:id,name',
+                'fromAccounts.holder:type,id',
+                'toAccounts.holder:type,id',
             );
         return response()->json($transactions->get());
     }
@@ -40,18 +40,18 @@ class BobinaBankingController extends Controller {
         $request->validate([
             'email' => ['required', 'string', 'max:255', 'email'],
         ]);
-        $query = CoilStorage::query();
-        $query->select(['coil_storages.*']);
+        $query = Account::query();
+        $query->select(['accounts.*']);
         if ($request->email != null) {
             $query->join('users', function (JoinClause $join) use ($request){
-                $join->on('coil_storages.holder_id', '=', 'users.id')
-                    ->where('coil_storages.holder_type', '=', User::class);
+                $join->on('accounts.holder_id', '=', 'users.id')
+                    ->where('accounts.holder_type', '=', User::class);
             });
             $query->where('users.email', '=', $request->email);
         }
-        if ($query->count()<=0) {
+        /*if ($query->count()<=0) {
             return response()->json(['message' => 'not found'], 404);
-        }
+        }*/
         return response()->json($query->get());
     }
 

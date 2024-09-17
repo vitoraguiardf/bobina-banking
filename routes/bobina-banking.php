@@ -17,7 +17,7 @@ Route::group([
         ->only(['index']);
     Route::resource('office', OfficeController::class)
         ->only(['index', 'create', 'store', 'destroy']);
-    Route::resource('coil-storage', CoilStorageController::class)
+    Route::resource('accounts', AccountController::class)
         ->only(['index', 'create', 'store', 'destroy']);
     Route::resource('transaction-types', TransactionTypeController::class)
         ->only(['index', 'store', 'create', 'destroy']);

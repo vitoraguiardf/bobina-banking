@@ -18,8 +18,8 @@ return new class extends Migration
             $table->foreign('creator_user_id')->references('id')->on('users');
 
             $table->unsignedBigInteger('transaction_type_id');
-            $table->unsignedBigInteger('from_storage_id')->nullable();
-            $table->unsignedBigInteger('to_storage_id')->nullable();
+            $table->unsignedBigInteger('from_account_id')->nullable();
+            $table->unsignedBigInteger('to_account_id')->nullable();
             $table->string('description', 100)->nullable();
             $table->unsignedInteger('quantity');
         });

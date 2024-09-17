@@ -16,10 +16,10 @@ class TransactionController extends Controller
         $transactions = Transaction::query()
             ->with(
                 'type:id,name,origin,destin',
-                'fromStorage:id,name',
-                'toStorage:id,name',
-                'fromStorage.holder:type,id',
-                'toStorage.holder:type,id',
+                'fromAccount:id,name',
+                'toAccount:id,name',
+                'fromAccount.holder:type,id',
+                'toAccount.holder:type,id',
             );
         return response()->json($transactions->get());
     }
@@ -36,8 +36,8 @@ class TransactionController extends Controller
             'creator_user_id' => 'required|integer|exists:users,id',
             'description' => 'nullable|string|max:150',
             'transaction_type_id' => 'required|integer|exists:transaction_types,id',
-            'from_storage_id' => 'nullable|integer|exists:coil_storages,id',
-            'to_storage_id' => 'nullable|integer|exists:coil_storages,id',
+            'from_account_id' => 'nullable|integer|exists:accounts,id',
+            'to_account_id' => 'nullable|integer|exists:accounts,id',
             'quantity' => 'required|integer|min:0',
         ]);
         Transaction::create($validated);

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\CoilStorage;
+use App\Models\Account;
 use Illuminate\Http\Request;
 
 class AccountsController extends Controller
@@ -12,7 +12,7 @@ class AccountsController extends Controller
      */
     public function index()
     {
-        $query = CoilStorage::query();
+        $query = Account::query();
         return response()->json($query->get());
     }
 
@@ -27,7 +27,7 @@ class AccountsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CoilStorage $coilStorage)
+    public function show(Account $account)
     {
         //
     }
@@ -35,7 +35,7 @@ class AccountsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CoilStorage $coilStorage)
+    public function update(Request $request, Account $account)
     {
         //
     }
@@ -43,7 +43,7 @@ class AccountsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CoilStorage $coilStorage)
+    public function destroy(Account $account)
     {
         //
     }

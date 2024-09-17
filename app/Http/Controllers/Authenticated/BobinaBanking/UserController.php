@@ -17,7 +17,7 @@ class UserController extends Controller
         return Inertia::render('Authenticated/BobinaBanking/User/Index', [
             'items' => User::query()
                 ->with([
-                    'coilStorages:holder_type,holder_id,name',
+                    'holdedAccounts:holder_type,holder_id,name',
                     ])
                 ->withSum([
                     'fromTransactions',

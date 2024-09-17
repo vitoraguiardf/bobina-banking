@@ -17,15 +17,15 @@ class BobinaBankingSeeder extends Seeder
         ]);
 
         // Cria alguns armazenamentos relacionados a empresa/filial
-        $office->coilStorages()->create([
+        $office->holdedAccounts()->create([
             'name' => 'Depósito Central',
             'creator_user_id' => static::$ROOT_USER->id,
         ]);
-        $office->coilStorages()->create([
+        $office->holdedAccounts()->create([
             'name' => 'Depósito Sul',
             'creator_user_id' => static::$ROOT_USER->id,
         ]);
-        $office->coilStorages()->create([
+        $office->holdedAccounts()->create([
             'name' => 'Depósito Norte',
             'creator_user_id' => static::$ROOT_USER->id,
         ]);

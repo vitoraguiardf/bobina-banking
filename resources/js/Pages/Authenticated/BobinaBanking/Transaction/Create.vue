@@ -15,15 +15,15 @@
                 </div>
 
                 <template v-if="form.transaction_type_id">
-                    <Select v-model="form.from_storage_id" :options="computed_list_from" fluid :filter="computed_list_from.length>5" checkmark
+                    <Select v-model="form.from_account_id" :options="computed_list_from" fluid :filter="computed_list_from.length>5" checkmark
                         :disabled="transaction_type.origin==0||loading"
                         placeholder="Conta de Saída" option-label="name" option-value="id" input-id="from" />
-                    <InputFeedBack input-id="from" :errorText="form.errors.from_storage_id"/>
+                    <InputFeedBack input-id="from" :errorText="form.errors.from_account_id"/>
 
-                    <Select v-model="form.to_storage_id" :options="computed_list_to" fluid :filter="computed_list_to.length>5" checkmark
+                    <Select v-model="form.to_account_id" :options="computed_list_to" fluid :filter="computed_list_to.length>5" checkmark
                         :disabled="transaction_type.destin==0||loading"
                         placeholder="Conta Destino" option-label="name" option-value="id" input-id="to" />
-                    <InputFeedBack input-id="to" :errorText="form.errors.to_storage_id"/>
+                    <InputFeedBack input-id="to" :errorText="form.errors.to_account_id"/>
                 </template>
 
                 <InputNumber v-model="form.quantity" :min="1" fluid :disabled="loading"
@@ -51,8 +51,8 @@ import DashboardLayout from '@/Layouts/Authenticated/BobinaBanking/Dashboard.vue
 import InputFeedBack from '@/Components/InputFeedBack.vue'
 const form = useForm({
     transaction_type_id: null,
-    from_storage_id: null,
-    to_storage_id: null,
+    from_account_id: null,
+    to_account_id: null,
     description: null,
     quantity: null,
 })
@@ -60,12 +60,12 @@ const loading = ref(false)
 const computed_list_from = computed(() => {
     return props.from_items
         .map((i)=>({id: i.id, name: `${i.holder.name} - ${i.name}`}))
-        .filter((i) => (i.id!=form.to_storage_id))
+        .filter((i) => (i.id!=form.to_account_id))
 })
 const computed_list_to = computed(() => {
     return props.to_items
         .map((i)=>({id: i.id, name: `${i.holder.name} - ${i.name}`}))
-        .filter((i) => (i.id!=form.from_storage_id))
+        .filter((i) => (i.id!=form.from_account_id))
 })
 const transaction_type = computed(() => {
     return props.type_items.filter((v) => (v.id===form.transaction_type_id))[0]

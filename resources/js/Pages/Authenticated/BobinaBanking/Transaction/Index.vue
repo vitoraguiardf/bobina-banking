@@ -86,20 +86,20 @@ initFilters();
                         contextMenu v-model:contextMenuSelection="ctxItem" @rowContextmenu="onRowContextMenu"
                         v-model:filters="filters">
                         <Column field="id" header="#" sortable />
-                        <Column field="type.name" header="Transaction" sortable>
+                        <Column field="transaction_type.name" header="Transaction" sortable>
                             <template #body="data">
                                 <div class="flex flex-col">
-                                    <span class="text-gray-800 dark:text-gray-200">{{ data.data.type.name }}</span>
+                                    <span class="text-gray-800 dark:text-gray-200">{{ data.data.transaction_type.name }}</span>
                                     <Created :data="{creator_user, create_at, updated_at} = data.data" />
                                 </div>
                             </template>
                         </Column>
-                        <Column field="from_storage.name" header="From" sortable>
+                        <Column field="from_account.name" header="From" sortable>
                             <template #body="data">
                                 <div class="flex flex-col">
-                                    <template v-if="data.data.from_storage!=null">
-                                        <span class="text-gray-800 dark:text-gray-200">{{ data.data.from_storage.name }}</span>
-                                        <span class="flex-row text-sm text-gray-600 dark:text-gray-400">{{ data.data.from_storage.holder.name }}</span>
+                                    <template v-if="data.data.from_account!=null">
+                                        <span class="text-gray-800 dark:text-gray-200">{{ data.data.from_account.name }}</span>
+                                        <span class="flex-row text-sm text-gray-600 dark:text-gray-400">{{ data.data.from_account.holder.name }}</span>
                                     </template>
                                     <template v-else>
                                         <span class="text-gray-800 dark:text-gray-200">&middot;</span>
@@ -107,12 +107,12 @@ initFilters();
                                 </div>
                             </template>
                         </Column>
-                        <Column field="to_storage.name" header="To" sortable>
+                        <Column field="to_account.name" header="To" sortable>
                             <template #body="data">
                                 <div class="flex flex-col">
-                                    <template v-if="data.data.to_storage!=null">
-                                        <span class="text-gray-800 dark:text-gray-200">{{ data.data.to_storage.name }}</span>
-                                        <span class="flex-row text-sm text-gray-600 dark:text-gray-400">{{ data.data.to_storage.holder.name }}</span>
+                                    <template v-if="data.data.to_account!=null">
+                                        <span class="text-gray-800 dark:text-gray-200">{{ data.data.to_account.name }}</span>
+                                        <span class="flex-row text-sm text-gray-600 dark:text-gray-400">{{ data.data.to_account.holder.name }}</span>
                                     </template>
                                     <template v-else>
                                         <span class="text-gray-800 dark:text-gray-200">&middot;</span>

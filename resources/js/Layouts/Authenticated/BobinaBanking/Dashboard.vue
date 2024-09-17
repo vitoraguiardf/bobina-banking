@@ -22,9 +22,9 @@ const navOptions = {
             hasAccess: true,
         },
         {
-            name: 'Storages',
-            route: route('bobina-banking.coil-storage.index'),
-            active: route().current('bobina-banking.coil-storage.index'),
+            name: 'Accounts',
+            route: route('bobina-banking.accounts.index'),
+            active: route().current('bobina-banking.accounts.index'),
             hasAccess: true,
         },
         {

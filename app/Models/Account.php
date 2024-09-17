@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
-class CoilStorage extends Model
+class Account extends Model
 {
     use HasFactory, WithCreator;
     protected $fillable = [
@@ -45,14 +45,14 @@ class CoilStorage extends Model
      * Transações positivas/cretidatas/entrada/to_this
      */
     function toTransactions(): HasMany {
-        return $this->hasMany(Transaction::class, 'to_storage_id');
+        return $this->hasMany(Transaction::class, 'to_account_id');
     }
 
     /**
      * Transações negativas/debitadas/saída/from_this
      */
     function fromTransactions(): HasMany {
-        return $this->hasMany(Transaction::class, 'from_storage_id');
+        return $this->hasMany(Transaction::class, 'from_account_id');
     }
 
 }

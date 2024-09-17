@@ -19,7 +19,7 @@ class OfficeController extends Controller
             'items' => Office::query()
                 ->with([
                     'creatorUser:id,name',
-                    'coilStorages:holder_type,holder_id,name',
+                    'holdedAccounts:holder_type,holder_id,name',
                 ])
                 ->withSum([
                     'fromTransactions',

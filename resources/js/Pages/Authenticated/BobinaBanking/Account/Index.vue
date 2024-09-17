@@ -17,7 +17,7 @@ const toast = useToast();
 
 // Methods
 const destroyItem = (item) => {
-    form.delete(route('bobina-banking.coil-storage.destroy', item.id), {
+    form.delete(route('bobina-banking.accounts.destroy', item.id), {
         onSuccess: () => {
             toast.add({ severity: 'success', summary: `Deleted`, detail: 'Successful deleted!', life: 3000 });
         },
@@ -67,7 +67,7 @@ const clearFilter = () => {
 initFilters();
 </script>
 <template>
-<Head title="Coil Storages" />
+<Head title="Accounts" />
     <DashboardLayout>
         <div class="py-6">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -77,7 +77,7 @@ initFilters();
                         <Button v-if="filters.global.value!=null&&filters.global.value!=''" type="button" icon="pi pi-filter-slash" label="Clear" outlined @click="clearFilter()" />
                     </div>
                     <div class="flex-row-reverse">
-                        <Button as="a" label="Create new" :href="route('bobina-banking.coil-storage.create')" link disabled />
+                        <Button as="a" label="Create new" :href="route('bobina-banking.accounts.create')" link disabled />
                     </div> 
                 </div>
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -86,7 +86,7 @@ initFilters();
                         contextMenu v-model:contextMenuSelection="ctxItem" @rowContextmenu="onRowContextMenu"
                         v-model:filters="filters">
                         <Column field="id" header="#" sortable />
-                        <Column field="name" header="Coil Storage" sortable>
+                        <Column field="name" header="Account" sortable>
                             <template #body="data">
                                 <div class="flex flex-col">
                                     <span class="text-gray-800 dark:text-gray-200">

@@ -13,18 +13,18 @@ class Transaction extends Model
     protected $fillable = [
         'creator_user_id',
         'transaction_type_id',
-        'from_storage_id',
-        'to_storage_id',
+        'from_account_id',
+        'to_account_id',
         'description',
         'quantity',
     ];
-    function fromStorage(): BelongsTo {
-        return $this->belongsTo(CoilStorage::class);
+    function fromAccount(): BelongsTo {
+        return $this->belongsTo(Account::class);
     }
-    function toStorage(): BelongsTo {
-        return $this->belongsTo(CoilStorage::class);
+    function toAccount(): BelongsTo {
+        return $this->belongsTo(Account::class);
     }
-    function type(): BelongsTo {
-        return $this->belongsTo(TransactionType::class, 'transaction_type_id');
+    function transactionType(): BelongsTo {
+        return $this->belongsTo(TransactionType::class);
     }
 }

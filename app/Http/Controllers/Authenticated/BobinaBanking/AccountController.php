@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Authenticated\BobinaBanking;
 
-use App\CoilStorageHolderTypes;
-use App\Models\CoilStorage;
+use App\AccountHolderTypes;
+use App\Models\Account;
 use App\Models\Office;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -11,15 +11,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 
-class CoilStorageController extends Controller
+class AccountController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        return Inertia::render('Authenticated/BobinaBanking/CoilStorage/Index', [
-            'items' => CoilStorage::query()
+        return Inertia::render('Authenticated/BobinaBanking/Account/Index', [
+            'items' => Account::query()
             ->with([
                 'creatorUser:id,name',
                 'holder:id,name',
@@ -44,8 +44,8 @@ class CoilStorageController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Authenticated/BobinaBanking/CoilStorage/Create', [
-            'holder_types' => CoilStorageHolderTypes::cases(),
+        return Inertia::render('Authenticated/BobinaBanking/Account/Create', [
+            'holder_types' => AccountHolderTypes::cases(),
             'holder_items' => [
                 User::class => User::select('id', 'name')->get(),
                 Office::class => Office::select('id', 'name')->get(),
@@ -69,14 +69,14 @@ class CoilStorageController extends Controller
             'name' => 'required|string|max:128',
             'description' => 'nullable|string|max:1000',
         ]);
-        $request->user()->createdCoilStorages()->create($validated);
-        return redirect(route('bobina-banking.coil-storage.index'));
+        $request->user()->createdAccounts()->create($validated);
+        return redirect(route('bobina-banking.accounts.index'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(CoilStorage $coilStorage)
+    public function show(Account $account)
     {
         //
     }
@@ -84,7 +84,7 @@ class CoilStorageController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CoilStorage $coilStorage)
+    public function edit(Account $account)
     {
         //
     }
@@ -92,7 +92,7 @@ class CoilStorageController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CoilStorage $coilStorage)
+    public function update(Request $request, Account $account)
     {
         //
     }
@@ -100,10 +100,10 @@ class CoilStorageController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CoilStorage $coilStorage): RedirectResponse
+    public function destroy(Account $account): RedirectResponse
     {
-        Gate::authorize('delete', $coilStorage);
-        $coilStorage->delete();
-        return redirect(route('bobina-banking.coil-storage.index'));
+        Gate::authorize('delete', $account);
+        $account->delete();
+        return redirect(route('bobina-banking.accounts.index'));
     }
 }
