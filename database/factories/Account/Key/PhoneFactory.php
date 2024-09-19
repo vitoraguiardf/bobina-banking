@@ -1,13 +1,13 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Account\Key;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Email>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Phone>
  */
-class EmailFactory extends Factory
+class PhoneFactory extends Factory
 {
     /**
      * Define the model's default state.
