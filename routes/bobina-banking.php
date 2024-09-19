@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Authenticated\BobinaBanking;
 
 use App\Http\Controllers\Authenticated\BobinaBanking\Account\Key\EmailController;
 use App\Http\Controllers\Authenticated\BobinaBanking\Account\Key\PhoneController;
+use App\Http\Controllers\Authenticated\BobinaBanking\Account\Key\RandomController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -27,6 +28,8 @@ Route::group([
             Route::resource('email', EmailController::class)
                 ->only(['index', 'create', 'store', 'destroy']);
             Route::resource('phone', PhoneController::class)
+                ->only(['index', 'create', 'store', 'destroy']);
+            Route::resource('random', RandomController::class)
                 ->only(['index', 'create', 'store', 'destroy']);
         });
     });
