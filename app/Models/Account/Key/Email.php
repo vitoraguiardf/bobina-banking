@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Email extends Model
 {
     use HasFactory, WithCreator;
+    protected $table = "email_account_keys";
     protected $fillable = [
         'creator_user_id',
         'address',

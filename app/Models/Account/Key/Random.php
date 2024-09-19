@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Random extends Model
 {
     use HasFactory, WithCreator;
+    protected $table = "random_account_keys";
     protected $fillable = [
         'creator_user_id',
         'random',

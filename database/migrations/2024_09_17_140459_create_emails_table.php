@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('emails', function (Blueprint $table) {
+        Schema::create('email_account_keys', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('creator_user_id');
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('emails');
+        Schema::dropIfExists('email_account_keys');
     }
 };
