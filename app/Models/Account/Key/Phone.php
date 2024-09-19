@@ -11,6 +11,6 @@ class Phone extends Model
     use HasFactory, WithCreator;
     protected $fillable = [
         'creator_user_id',
-        'address',
+        'number',
     ];
 }
