@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Authenticated\BobinaBanking\Account\Key;
 
-use App\Http\Controllers\Authenticated\BobinaBanking\Controller;
 use App\Http\Requests\BobinaBanking\Account\Key\StoreEmailRequest;
 use App\Http\Requests\BobinaBanking\Account\Key\UpdateEmailRequest;
 use App\Models\Account\Key\Email;
