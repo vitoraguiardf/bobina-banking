@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Authenticated\BobinaBanking\Account;
 use App\Http\Requests\BobinaBanking\Account\Key\StoreKeyRequest;
 use App\Http\Requests\BobinaBanking\Account\Key\UpdateKeyRequest;
 use App\Models\Account\Key;
+use Inertia\Inertia;
 
 class KeyController extends Controller
 {
@@ -13,7 +14,12 @@ class KeyController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Authenticated/BobinaBanking/Account/Key/Index', [
+            'items' => Key::query()
+            ->with('account', 'key')
+            ->latest()
+            ->get()
+        ]);
     }
 
     /**

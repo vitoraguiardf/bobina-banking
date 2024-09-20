@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Authenticated\BobinaBanking;
 use App\Http\Controllers\Authenticated\BobinaBanking\Account\Key\EmailController;
 use App\Http\Controllers\Authenticated\BobinaBanking\Account\Key\PhoneController;
 use App\Http\Controllers\Authenticated\BobinaBanking\Account\Key\RandomController;
+use App\Http\Controllers\Authenticated\BobinaBanking\Account\KeyController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -24,6 +25,8 @@ Route::group([
     Route::resource('accounts', AccountController::class)
         ->only(['index', 'create', 'store', 'destroy']);
     Route::group(['as' => 'accounts.', 'prefix' => 'accounts'], function () {
+        Route::resource('key', KeyController::class)
+        ->only(['index']);
         Route::group(['as' => 'key.', 'prefix' => 'key'], function () {
             Route::resource('email', EmailController::class)
                 ->only(['index', 'create', 'store', 'destroy']);
