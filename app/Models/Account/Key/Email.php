@@ -12,6 +12,6 @@ class Email extends Model
     protected $table = "email_account_keys";
     protected $fillable = [
         'creator_user_id',
-        'address',
+        'name',
     ];
 }

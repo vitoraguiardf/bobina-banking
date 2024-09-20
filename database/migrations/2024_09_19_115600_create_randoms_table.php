@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('creator_user_id');
             $table->foreign('creator_user_id')->references('id')->on('users');
-            $table->uuid('random')->unique();
+            $table->uuid('name')->unique();
         });
     }
 

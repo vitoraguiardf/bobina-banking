@@ -86,7 +86,7 @@ initFilters();
                         contextMenu v-model:contextMenuSelection="ctxItem" @rowContextmenu="onRowContextMenu"
                         v-model:filters="filters">
                         <Column field="id" header="#" sortable />
-                        <Column field="random" header="Random" sortable>
+                        <Column field="name" header="Random" sortable>
                             <template #body="slotProps">
                                 <div class="flex flex-col">
                                     <span class="text-gray-800 dark:text-gray-200">{{ slotProps.data.name }}</span>

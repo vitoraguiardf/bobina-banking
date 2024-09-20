@@ -12,6 +12,6 @@ class Random extends Model
     protected $table = "random_account_keys";
     protected $fillable = [
         'creator_user_id',
-        'random',
+        'name',
     ];
 }

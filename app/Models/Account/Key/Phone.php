@@ -12,6 +12,6 @@ class Phone extends Model
     protected $table = "phone_account_keys";
     protected $fillable = [
         'creator_user_id',
-        'number',
+        'name',
     ];
 }
